@@ -10,12 +10,12 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../grammars/generated/cpp'))
 
 try:
-    from CPP14Lexer import CPP14Lexer
-    from CPP14Parser import CPP14Parser
+    from  ...grammers.generated.cpp.CPP14Lexer import CPP14Lexer
+    # from  ...grammers.generated.cpp.CPP14Parser import CPP14Parser
     ANTLR_AVAILABLE = True
 except ImportError:
     ANTLR_AVAILABLE = False
-    print("⚠️  Warning: ANTLR generated files for C++ not found. Using fallback tokenizer.")
+    print(" Warning: ANTLR generated files for C++ not found. Using fallback tokenizer.")
 
 class CppHandler(BaseLanguageHandler):
     """Handler برای زبان ++C"""
@@ -25,7 +25,7 @@ class CppHandler(BaseLanguageHandler):
         
         if ANTLR_AVAILABLE:
             self.lexer_class = CPP14Lexer
-            self.parser_class = CPP14Parser
+            # self.parser_class = CPP14Parser
         else:
             print("Using regex-based fallback for C++")
         

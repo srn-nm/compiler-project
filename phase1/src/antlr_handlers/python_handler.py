@@ -9,15 +9,10 @@ from antlr4 import InputStream, CommonTokenStream
 from .base_handler import BaseLanguageHandler
 
 # ایمپورت lexer/parser تولید شده
-import sys
-import os
-
-# اضافه کردن مسیر گرامرهای تولید شده به sys.path
-sys.path.append(os.path.join(os.path.dirname(__file__), '../../grammars/generated/python'))
 
 try:
-    from Python3Lexer import Python3Lexer
-    from Python3Parser import Python3Parser
+    from  ...grammers.generated.python.Python3Lexer import Python3Lexer
+    # from  ...grammers.generated.python.Python3Parser import Python3Parser
     ANTLR_AVAILABLE = True
 except ImportError:
     ANTLR_AVAILABLE = False
@@ -31,7 +26,7 @@ class PythonHandler(BaseLanguageHandler):
         
         if ANTLR_AVAILABLE:
             self.lexer_class = Python3Lexer
-            self.parser_class = Python3Parser
+            # self.parser_class = Python3Parser
         else:
             print("Using regex-based fallback for Python")
     

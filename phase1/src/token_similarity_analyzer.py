@@ -1,5 +1,5 @@
 from antlr4 import *
-from generated.Python3Lexer import Python3Lexer
+from grammers.generated.python.Python3Lexer import Python3Lexer
 from collections import Counter
 import math
 

@@ -1,0 +1,17 @@
+{
+  "normalize_identifiers": true,
+  "normalize_literals": true,
+  "remove_comments": true,
+  "normalize_whitespace": true,
+  "case_sensitive": false,
+  "min_match_length": 3,
+  "similarity_weights": {
+    "jaccard": 0.2,
+    "cosine": 0.3,
+    "levenshtein": 0.3,
+    "sequence": 0.2
+  },
+  "lexer_options": {
+    "strict_mode": false
+  }
+}

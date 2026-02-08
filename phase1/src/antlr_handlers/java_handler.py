@@ -7,14 +7,9 @@ from typing import List, Dict, Any
 
 from .base_handler import BaseLanguageHandler
 
-# اضافه کردن مسیر گرامرهای تولید شده
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '../../grammars/generated/java'))
-
 try:
-    from JavaLexer import JavaLexer
-    from JavaParser import JavaParser
+    from  ...grammers.generated.java.JavaLexer import JavaLexer
+    # from  ...grammers.generated.java.JavaParser import JavaParser
     ANTLR_AVAILABLE = True
 except ImportError:
     ANTLR_AVAILABLE = False
@@ -27,7 +22,7 @@ class JavaHandler(BaseLanguageHandler):
         
         if ANTLR_AVAILABLE:
             self.lexer_class = JavaLexer
-            self.parser_class = JavaParser
+            # self.parser_class = JavaParser
     
     def get_tokens(self, code: str) -> List[str]:
         """استخراج توکن‌ها"""
