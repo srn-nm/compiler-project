@@ -1,0 +1,39 @@
+{
+  "phase3_config": {
+    "language": "python",
+    "plagiarism_threshold": 0.7,
+    "similarity_weights": {
+      "structural": 0.4,
+      "graph_edit": 0.3,
+      "subgraph": 0.3
+    },
+    "integration_weights": {
+      "token": 0.2,
+      "ast": 0.3,
+      "cfg": 0.5
+    },
+    "graph_analysis": {
+      "max_execution_paths": 100,
+      "subgraph_extraction_radius": 2,
+      "node_matching_threshold": 0.6,
+      "subgraph_similarity_threshold": 0.7
+    },
+    "visualization": {
+      "max_nodes_display": 20,
+      "generate_dot_files": true,
+      "generate_png_images": false,
+      "color_scheme": "viridis"
+    },
+    "output": {
+      "generate_json_report": true,
+      "generate_text_report": true,
+      "generate_html_report": false,
+      "save_intermediate_results": false
+    },
+    "logging": {
+      "level": "INFO",
+      "log_to_file": true,
+      "log_file": "phase3_analysis.log"
+    }
+  }
+}
