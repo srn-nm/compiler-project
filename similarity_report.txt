@@ -1,0 +1,33 @@
+======================================================================
+CODE SIMILARITY ANALYSIS REPORT - PHASE 1
+======================================================================
+
+Files:
+  File 1: code1.py
+  File 2: code2.py
+
+Overall Similarity: 87.5%
+Normalized Similarity: 94.1%
+
+Detailed Metrics:
+  jaccard_similarity       : 94.12%
+  cosine_similarity        : 99.78%
+  levenshtein_similarity   : 76.13%
+  sequence_similarity      : 76.63%
+  normalized_jaccard       : 94.12%
+
+Token Statistics:
+  Code 1 tokens: 472
+  Code 2 tokens: 599
+  Common types: 32
+
+Matching Sections: 64
+  Match 1: 13 tokens (lines 9-12)
+  Match 2: 11 tokens (lines 7-9)
+  Match 3: 11 tokens (lines 56-61)
+  Match 4: 10 tokens (lines 5-7)
+  Match 5: 10 tokens (lines 24-25)
+
+======================================================================
+Generated: 2026-02-12 14:09:01
+======================================================================

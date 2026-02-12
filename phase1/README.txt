@@ -22,5 +22,15 @@ python phase1/src/main.py phase1/tests/test_python/code1.py phase1/tests/test_py
 python -m phase1.src.main phase1/tests/test_python/code1.py phase1/tests/test_python/code2.py --verbose
 
 
-# تحلیل ماتریسی چند فایل
-python src/main.py *.py --matrix --output matrix_report.json
+
+# اجرای ساده با دو فایل
+python phase1/src/main.py phase1/tests/test_python/code1.py phase1/tests/test_python/code2.py
+
+# با خروجی HTML و نمایش جزئیات
+python phase1/src/main.py phase1/tests/test_python/code1.py phase1/tests/test_python/code2.py --visual --verbose
+
+# با فرمت خاص
+python phase1/src/main.py phase1/tests/test_python/code1.py phase1/tests/test_python/code2.py --format html
+
+# ماتریس مقایسه چند فایل
+python phase1/src/main.py *.py --matrix --output similarity_matrix
