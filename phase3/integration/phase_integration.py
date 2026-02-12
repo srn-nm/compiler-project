@@ -190,7 +190,7 @@ def run_complete_analysis(code1: str, code2: str,
     phase2_results = None
     
     # ============ Phase 1: Token Analysis ============
-    print("\n📊 Phase 1: Token-based analysis...")
+    print("\n Phase 1: Token-based analysis...")
     try:
         project_root = Path(__file__).parent.parent.parent
         sys.path.insert(0, str(project_root))
@@ -200,14 +200,14 @@ def run_complete_analysis(code1: str, code2: str,
         analyzer1 = TokenSimilarityAnalyzer()
         phase1_results = analyzer1.calculate_similarity(code1, code2)
         score1 = phase1_results.get('overall_similarity', 0)
-        print(f"   ✅ Complete - Score: {score1:.1f}%")
+        print(f"    Complete - Score: {score1:.1f}%")
     except ImportError:
-        print("   ⚠️ Phase 1 not available - skipping")
+        print("    Phase 1 not available - skipping")
     except Exception as e:
-        print(f"   ⚠️ Error: {e}")
+        print(f"    Error: {e}")
     
     # ============ Phase 2: AST Analysis ============
-    print("\n🌳 Phase 2: AST analysis...")
+    print("\n Phase 2: AST analysis...")
     try:
         from phase2.analyzer import ASTSimilarityAnalyzer
         
@@ -216,29 +216,29 @@ def run_complete_analysis(code1: str, code2: str,
         ast2 = analyzer2.parse_code(code2)
         phase2_results = analyzer2.calculate_ast_similarity(ast1, ast2)
         score2 = phase2_results.get('ast_similarity_score', 0)
-        print(f"   ✅ Complete - Score: {score2:.1f}%")
+        print(f"   Complete - Score: {score2:.1f}%")
     except ImportError:
-        print("   ⚠️ Phase 2 not available - skipping")
+        print("    Phase 2 not available - skipping")
     except Exception as e:
-        print(f"   ⚠️ Error: {e}")
+        print(f"    Error: {e}")
     
     # ============ Phase 3: CFG Analysis ============
-    print("\n🔀 Phase 3: CFG analysis...")
+    print("\n Phase 3: CFG analysis...")
     analyzer3 = Phase3CFGSimilarity()
     phase3_results = analyzer3.analyze_code_pair(
         code1, code2, phase1_results, phase2_results
     )
     score3 = phase3_results.get('cfg_similarity_score', 0)
-    print(f"   ✅ Complete - Score: {score3:.1f}%")
+    print(f"   Complete - Score: {score3:.1f}%")
     
     # ============ Integration ============
-    print("\n🔄 Integrating all phases...")
+    print("\n Integrating all phases...")
     final_results = Phase3Integration.integrate_all_phases(
         code1, code2, phase1_results, phase2_results, phase3_results
     )
     
     # Save results
     save_json(final_results, output_file)
-    print(f"\n💾 Results saved: {output_file}")
+    print(f"\n Results saved: {output_file}")
     
     return final_results

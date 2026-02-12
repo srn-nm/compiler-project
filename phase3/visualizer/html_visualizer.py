@@ -903,7 +903,6 @@ class CFGHTMLVisualizer:
 def generate_cfg_html(cfg: ControlFlowGraph,
                      filename: str = "code.py",
                      output_path: str = "cfg_visualization.html") -> str:
-    """Generate interactive HTML visualization for CFG"""
     visualizer = CFGHTMLVisualizer()
     return visualizer.generate_cfg_html(cfg, filename, output_path)
 
@@ -914,7 +913,6 @@ def generate_cfg_comparison_html(cfg1: ControlFlowGraph,
                                 file2_name: str = "code2.py",
                                 results: Optional[Dict] = None,
                                 output_path: str = "cfg_comparison.html") -> str:
-    """Generate interactive HTML comparison for two CFGs"""
     visualizer = CFGHTMLVisualizer()
     return visualizer.generate_comparison_html(
         cfg1, cfg2, file1_name, file2_name, results, output_path
