@@ -1,6 +1,6 @@
 """
 Control Flow Graph (CFG) Builder from AST
-Complete implementation with all control structures
+Complete implementation with proper AST traversal
 """
 
 from typing import Dict, List, Set, Any, Optional, Tuple
@@ -59,36 +59,11 @@ class CFGNode:
             'label': self.label,
             'line_start': self.line_start,
             'line_end': self.line_end,
-            'statement_count': len(self.statements),
-            'in_degree': len(self.in_edges),
-            'out_degree': len(self.out_edges)
+            'statement_count': len(self.statements)
         }
 
     def __repr__(self) -> str:
         return f"CFGNode({self.id}, {self.type.value})"
-
-
-class BasicBlock:
-    """Basic block - sequence of statements without branches"""
-    
-    def __init__(self, block_id: int):
-        self.id = block_id
-        self.statements: List[Dict] = []
-        self.entry_node: Optional[CFGNode] = None
-        self.exit_node: Optional[CFGNode] = None
-        self.predecessors: Set[int] = set()
-        self.successors: Set[int] = set()
-
-    def add_statement(self, statement: str, line: int, stmt_type: str = "stmt"):
-        """Add statement to block"""
-        self.statements.append({
-            'text': statement,
-            'line': line,
-            'type': stmt_type
-        })
-
-    def is_empty(self) -> bool:
-        return len(self.statements) == 0
 
 
 class CFGBuilder:
@@ -101,6 +76,7 @@ class CFGBuilder:
         self.edges: List[Tuple[int, int, Dict]] = []
         self.basic_blocks: Dict[int, BasicBlock] = {}
         self.current_function = None
+        self.debug = True  # فعال کردن دیباگ
 
     def _new_node_id(self) -> int:
         """Generate new node ID"""
@@ -126,6 +102,9 @@ class CFGBuilder:
 
     def build_from_ast(self, ast_data: Dict) -> Dict[str, Any]:
         """Build CFG from AST data"""
+        if self.debug:
+            print(f"\n   🏗️  Building CFG from AST...")
+        
         # Reset state
         self.node_counter = 0
         self.nodes = {}
@@ -146,6 +125,9 @@ class CFGBuilder:
         # Connect all leaf nodes to exit
         self._connect_dangling_nodes(exit_node.id)
         
+        if self.debug:
+            print(f"   ✅ CFG built: {len(self.nodes)} nodes, {len(self.edges)} edges")
+        
         return {
             'entry_id': entry_node.id,
             'exit_id': exit_node.id,
@@ -160,23 +142,32 @@ class CFGBuilder:
             return current_id
 
         node_type = ast_node.get('type', '')
-
+        
         # Handle different node types
-        handlers = {
-            'Module': self._process_module,
-            'FunctionDef': self._process_function,
-            'ClassDef': self._process_class,
-            'If': self._process_if,
-            'For': self._process_for,
-            'While': self._process_while,
-            'Return': self._process_return,
-            'Assign': self._process_assign,
-            'AugAssign': self._process_assign,
-            'Expr': self._process_expression,
-        }
-
-        handler = handlers.get(node_type, self._process_default)
-        return handler(ast_node, current_id, exit_id)
+        if node_type == 'Module':
+            return self._process_module(ast_node, current_id, exit_id)
+        elif node_type == 'FunctionDef':
+            return self._process_function(ast_node, current_id, exit_id)
+        elif node_type == 'ClassDef':
+            return self._process_class(ast_node, current_id, exit_id)
+        elif node_type == 'If':
+            return self._process_if(ast_node, current_id, exit_id)
+        elif node_type == 'For':
+            return self._process_for(ast_node, current_id, exit_id)
+        elif node_type == 'While':
+            return self._process_while(ast_node, current_id, exit_id)
+        elif node_type == 'Return':
+            return self._process_return(ast_node, current_id, exit_id)
+        elif node_type in ['Assign', 'AugAssign', 'AnnAssign']:
+            return self._process_assign(ast_node, current_id, exit_id)
+        elif node_type == 'Expr':
+            return self._process_expression(ast_node, current_id, exit_id)
+        else:
+            # Process children for unknown node types
+            last_id = current_id
+            for child in ast_node.get('children', []):
+                last_id = self._process_ast_node(child, last_id, exit_id)
+            return last_id
 
     def _process_module(self, node: Dict, current_id: int, exit_id: int) -> int:
         """Process module node"""
@@ -188,6 +179,8 @@ class CFGBuilder:
     def _process_function(self, node: Dict, current_id: int, exit_id: int) -> int:
         """Process function definition"""
         func_name = node.get('value', 'function')
+        if func_name == 'FUNC':
+            func_name = f"func_{self.node_counter}"
         
         # Create function entry node
         func_entry = self._create_node(NodeType.FUNCTION, f"func_{func_name}")
@@ -196,7 +189,8 @@ class CFGBuilder:
         # Process function body
         last_id = func_entry.id
         for child in node.get('children', []):
-            if child.get('type') != 'arguments':
+            child_type = child.get('type', '')
+            if child_type not in ['name', 'arguments', 'arg']:
                 last_id = self._process_ast_node(child, last_id, exit_id)
         
         # Connect to exit
@@ -207,7 +201,6 @@ class CFGBuilder:
 
     def _process_class(self, node: Dict, current_id: int, exit_id: int) -> int:
         """Process class definition"""
-        # Class doesn't affect control flow directly
         last_id = current_id
         for child in node.get('children', []):
             last_id = self._process_ast_node(child, last_id, exit_id)
@@ -268,7 +261,8 @@ class CFGBuilder:
         
         last_body = body_start.id
         for child in node.get('children', []):
-            if child.get('type') == 'body':
+            child_type = child.get('type', '')
+            if child_type == 'body':
                 for stmt in child.get('children', []):
                     last_body = self._process_ast_node(stmt, last_body, exit_id)
         
@@ -293,7 +287,8 @@ class CFGBuilder:
         
         last_body = body_start.id
         for child in node.get('children', []):
-            if child.get('type') == 'body':
+            child_type = child.get('type', '')
+            if child_type == 'body':
                 for stmt in child.get('children', []):
                     last_body = self._process_ast_node(stmt, last_body, exit_id)
         
@@ -315,32 +310,27 @@ class CFGBuilder:
 
     def _process_assign(self, node: Dict, current_id: int, exit_id: int) -> int:
         """Process assignment"""
+        line = node.get('line', 0)
         assign_node = self._create_node(
             NodeType.BASIC_BLOCK,
-            "assign",
-            line_start=node.get('line')
+            f"assign_L{line}",
+            line_start=line
         )
-        assign_node.add_statement("assignment", node.get('line'))
+        assign_node.add_statement("assignment", line)
         self._add_edge(current_id, assign_node.id, "assign")
         return assign_node.id
 
     def _process_expression(self, node: Dict, current_id: int, exit_id: int) -> int:
         """Process expression"""
+        line = node.get('line', 0)
         expr_node = self._create_node(
             NodeType.BASIC_BLOCK,
-            "expr",
-            line_start=node.get('line')
+            f"expr_L{line}",
+            line_start=line
         )
-        expr_node.add_statement("expression", node.get('line'))
+        expr_node.add_statement("expression", line)
         self._add_edge(current_id, expr_node.id, "exec")
         return expr_node.id
-
-    def _process_default(self, node: Dict, current_id: int, exit_id: int) -> int:
-        """Default handler - process children"""
-        last_id = current_id
-        for child in node.get('children', []):
-            last_id = self._process_ast_node(child, last_id, exit_id)
-        return last_id
 
     def _connect_dangling_nodes(self, exit_id: int):
         """Connect nodes with no outgoing edges to exit"""
@@ -348,6 +338,29 @@ class CFGBuilder:
             if node.type not in [NodeType.EXIT, NodeType.RETURN]:
                 if not node.out_edges:
                     self._add_edge(node_id, exit_id, "implicit_exit")
+
+
+class BasicBlock:
+    """Basic block - sequence of statements without branches"""
+    
+    def __init__(self, block_id: int):
+        self.id = block_id
+        self.statements: List[Dict] = []
+        self.entry_node: Optional[CFGNode] = None
+        self.exit_node: Optional[CFGNode] = None
+        self.predecessors: Set[int] = set()
+        self.successors: Set[int] = set()
+
+    def add_statement(self, statement: str, line: int, stmt_type: str = "stmt"):
+        """Add statement to block"""
+        self.statements.append({
+            'text': statement,
+            'line': line,
+            'type': stmt_type
+        })
+
+    def is_empty(self) -> bool:
+        return len(self.statements) == 0
 
 
 class ControlFlowGraph:
@@ -381,7 +394,6 @@ class ControlFlowGraph:
         
         paths = []
         stack = [(self.entry_node_id, [self.entry_node_id])]
-        visited_cycles = set()
         
         while stack and len(paths) < max_paths:
             node_id, path = stack.pop()
@@ -395,14 +407,8 @@ class ControlFlowGraph:
                 continue
             
             for next_id in node.out_edges:
-                # Prevent infinite loops
-                if next_id in path:
-                    cycle_key = f"{node_id}-{next_id}"
-                    if cycle_key in visited_cycles:
-                        continue
-                    visited_cycles.add(cycle_key)
-                
-                stack.append((next_id, path + [next_id]))
+                if next_id not in path or next_id == self.entry_node_id:
+                    stack.append((next_id, path + [next_id]))
         
         return paths
 
@@ -452,19 +458,18 @@ def create_mock_ast() -> Dict:
         'children': [
             {
                 'type': 'FunctionDef',
-                'value': 'test_function',
+                'value': 'example',
                 'line': 1,
                 'children': [
                     {
                         'type': 'If',
                         'line': 2,
                         'children': [
-                            {'type': 'test', 'value': 'condition'},
+                            {'type': 'test'},
                             {
                                 'type': 'body',
                                 'children': [
-                                    {'type': 'Assign', 'line': 3},
-                                    {'type': 'Return', 'line': 4}
+                                    {'type': 'Return', 'line': 3}
                                 ]
                             }
                         ]

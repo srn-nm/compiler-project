@@ -76,19 +76,19 @@ def create_summary(results: Dict[str, Any]) -> str:
     # Score
     if 'combined_similarity_score' in results:
         score = results['combined_similarity_score']
-        lines.append(f"\n🎯 Overall Similarity: {score:.2f}%")
+        lines.append(f"\n Overall Similarity: {score:.2f}%")
     elif 'cfg_similarity_score' in results:
         score = results['cfg_similarity_score']
-        lines.append(f"\n🎯 CFG Similarity: {score:.2f}%")
+        lines.append(f"\n CFG Similarity: {score:.2f}%")
     
     # Decision
     is_similar = results.get('is_plagiarism_suspected', False)
     threshold = results.get('threshold_used', 70)
     decision, emoji = format_decision(is_similar, threshold)
-    lines.append(f"\n⚖️  Verdict: {emoji} {decision}")
+    lines.append(f"\n Verdict: {emoji} {decision}")
     
     # Timestamp
-    lines.append(f"\n📅 Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    lines.append(f"\n Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     lines.append("\n" + "=" * 70)
     
     return "\n".join(lines)

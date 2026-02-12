@@ -96,124 +96,461 @@ def format_metric_value(value):
     else:
         return str(type(value).__name__)
 
-
 def generate_matrix_html(results: Dict, filenames: List[str]) -> str:
     html = f"""
     <!DOCTYPE html>
-    <html>
+    <html lang="fa" dir="rtl">
     <head>
         <meta charset="UTF-8">
-        <title>Code Similarity Matrix Analysis</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ماتریس شباهت کد - تحلیل فاز ۱</title>
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap');
+            
+            * {{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }}
+            
             body {{
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                margin: 20px;
-                background-color: #f5f5f5;
+                font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: #0f172a;
+                padding: 30px 20px;
+                color: #e2e8f0;
+                line-height: 1.6;
             }}
+            
             .container {{
-                max-width: 1000px;
+                max-width: 1600px;
                 margin: 0 auto;
-                background-color: white;
-                padding: 30px;
-                border-radius: 10px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                background: #1e293b;
+                padding: 40px;
+                border-radius: 16px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+                border: 1px solid #334155;
             }}
+            
             h1 {{
-                color: #2c3e50;
+                font-size: 2em;
+                font-weight: 700;
+                color: #60a5fa;
+                margin-bottom: 20px;
+                text-align: center;
+                padding-bottom: 15px;
+                border-bottom: 2px solid #334155;
             }}
+            
+            h2 {{
+                color: #94a3b8;
+                margin: 30px 0 20px 0;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #334155;
+                font-weight: 600;
+            }}
+            
+            .stats {{
+                background: #0f172a;
+                padding: 25px;
+                border-radius: 12px;
+                margin: 20px 0;
+                border: 1px solid #334155;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                text-align: center;
+            }}
+            
+            .stat-item {{
+                padding: 15px;
+                background: #1e293b;
+                border-radius: 8px;
+                border: 1px solid #334155;
+            }}
+            
+            .stat-value {{
+                font-size: 36px;
+                font-weight: 700;
+                color: #60a5fa;
+                margin-bottom: 5px;
+            }}
+            
+            .stat-label {{
+                color: #94a3b8;
+                font-size: 14px;
+            }}
+            
+            .matrix-container {{
+                margin: 30px 0;
+                overflow-x: auto;
+                direction: ltr;
+                text-align: left;
+                background: #0f172a;
+                padding: 20px;
+                border-radius: 12px;
+                border: 1px solid #334155;
+            }}
+            
             .matrix {{
                 display: inline-block;
-                margin: 20px 0;
             }}
+            
             .matrix-row {{
                 display: flex;
+                align-items: center;
+                margin: 4px 0;
             }}
+            
+            .matrix-label {{
+                width: 70px;
+                padding: 10px;
+                font-weight: 600;
+                color: #94a3b8;
+                font-size: 14px;
+                text-align: center;
+            }}
+            
             .matrix-cell {{
-                width: 80px;
-                height: 60px;
+                width: 70px;
+                height: 70px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 margin: 2px;
-                border-radius: 4px;
+                border-radius: 8px;
                 color: white;
-                font-weight: bold;
+                font-weight: 700;
+                font-size: 16px;
+                transition: transform 0.2s, box-shadow 0.2s;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+                text-shadow: 0 1px 2px rgba(0,0,0,0.5);
             }}
-            .matrix-label {{
-                width: 80px;
-                padding: 10px;
-                font-weight: bold;
-                color: #2c3e50;
+            
+            .matrix-cell:hover {{
+                transform: scale(1.05);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+                border: 1px solid rgba(255,255,255,0.2);
             }}
-            .stats {{
-                background: #f8f9fa;
+            
+            .comparisons-grid {{
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                gap: 20px;
+                margin: 20px 0;
+            }}
+            
+            .comparison-card {{
+                background: #0f172a;
                 padding: 20px;
+                border-radius: 12px;
+                border: 1px solid #334155;
+                transition: all 0.2s;
+            }}
+            
+            .comparison-card:hover {{
+                border-color: #60a5fa;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(96, 165, 250, 0.2);
+                background: #0a0f1a;
+            }}
+            
+            .comparison-header {{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #334155;
+            }}
+            
+            .file-badge {{
+                background: #1e293b;
+                padding: 6px 12px;
+                border-radius: 20px;
+                font-size: 13px;
+                font-weight: 600;
+                color: #60a5fa;
+                border: 1px solid #334155;
+            }}
+            
+            .similarity-circle {{
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 700;
+                font-size: 20px;
+                background: #0f172a;
+                border: 2px solid;
+                margin: 0 auto;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            }}
+            
+            .token-stats {{
+                display: flex;
+                justify-content: space-between;
+                margin-top: 15px;
+                padding-top: 15px;
+                border-top: 1px solid #334155;
+                color: #94a3b8;
+                font-size: 13px;
+            }}
+            
+            .footer {{
+                text-align: center;
+                margin-top: 50px;
+                padding-top: 30px;
+                border-top: 1px solid #334155;
+                color: #64748b;
+            }}
+            
+            .badge {{
+                display: inline-block;
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 600;
+                background: #1e293b;
+                color: #e2e8f0;
+                border: 1px solid #334155;
+            }}
+            
+            .similarity-legend {{
+                display: flex;
+                align-items: center;
+                gap: 30px;
+                margin-top: 20px;
+                padding: 20px;
+                background: #0f172a;
+                border-radius: 8px;
+                border: 1px solid #334155;
+                flex-wrap: wrap;
+            }}
+            
+            .legend-item {{
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 13px;
+                color: #94a3b8;
+            }}
+            
+            .legend-color {{
+                width: 20px;
+                height: 20px;
+                border-radius: 4px;
+                border: 1px solid rgba(0,0,0,0.3);
+            }}
+            
+            .filename-list {{
+                background: #0f172a;
+                padding: 15px;
                 border-radius: 8px;
                 margin: 20px 0;
+                border: 1px solid #334155;
+                color: #cbd5e1;
+                font-size: 14px;
+            }}
+            
+            .phase-badge {{
+                background: #2563eb;
+                padding: 8px 16px;
+                border-radius: 8px;
+                font-weight: 600;
+                display: inline-block;
+                color: white;
+                border: 1px solid #3b82f6;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            }}
+            
+            .filename-highlight {{
+                color: #60a5fa;
+                font-weight: 600;
+            }}
+            
+            .detail-text {{
+                color: #cbd5e1;
+            }}
+            
+            @media (max-width: 768px) {{
+                .container {{
+                    padding: 20px;
+                }}
+                
+                .matrix-label,
+                .matrix-cell {{
+                    width: 50px;
+                    height: 50px;
+                    font-size: 14px;
+                }}
+                
+                .stats {{
+                    grid-template-columns: 1fr;
+                }}
             }}
         </style>
     </head>
     <body>
         <div class="container">
-            <h1>Code Similarity Matrix Analysis</h1>
+            <h1>📊 ماتریس شباهت کد - تحلیل فاز ۱</h1>
             
             <div class="stats">
-                <strong>Files Analyzed:</strong> {results['num_files']}<br>
-                <strong>Comparisons:</strong> {len(results['comparisons'])}<br>
+                <div class="stat-item">
+                    <div class="stat-value">{results['num_files']}</div>
+                    <div class="stat-label">فایل تحلیل شده</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">{len(results['comparisons'])}</div>
+                    <div class="stat-label">مقایسه انجام شده</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">
+                        {max([max(row) for row in results['similarity_matrix']])*100:.0f}%
+                    </div>
+                    <div class="stat-label">بیشترین شباهت</div>
+                </div>
             </div>
             
-            <h2>Similarity Matrix</h2>
-            <div class="matrix">
-                <div class="matrix-row">
-                    <div class="matrix-label"></div>
+            <div class="filename-list">
+                <span class="filename-highlight">📁 فایل‌های ورودی:</span>
+                <span style="color: #cbd5e1;"> {', '.join(filenames)}</span>
+            </div>
+            
+            <h2>🔗 ماتریس شباهت</h2>
+            <div class="matrix-container">
+                <div class="matrix">
+                    <div class="matrix-row">
+                        <div class="matrix-label"></div>
     """
     
     for i in range(results['num_files']):
-        html += f'<div class="matrix-label">File {i+1}</div>'
+        html += f'<div class="matrix-label" style="color: #94a3b8;">فایل {i+1}</div>'
     html += '</div>'
     
     matrix = results['similarity_matrix']
     for i in range(results['num_files']):
         html += f'<div class="matrix-row">'
-        html += f'<div class="matrix-label">File {i+1}</div>'
+        html += f'<div class="matrix-label" style="color: #94a3b8;">فایل {i+1}</div>'
         
         for j in range(results['num_files']):
             val = matrix[i][j]
-            color = f'hsl({120 * val}, 70%, 45%)'
-            html += f'<div class="matrix-cell" style="background-color: {color};">{val*100:.0f}%</div>'
+            if val > 0.7:
+                bg_color = '#10b981'  # سبز تیره
+            elif val > 0.4:
+                bg_color = '#f59e0b'  # نارنجی تیره
+            else:
+                bg_color = '#ef4444'  # قرمز تیره
+            html += f'<div class="matrix-cell" style="background-color: {bg_color};">{val*100:.0f}%</div>'
         
         html += '</div>'
     
-    html += '</div>'
-    
-    html += '<h2>Detailed Comparisons</h2>'
-    for comp in results['comparisons'][:10]: 
-        html += f'''
-        <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 4px;">
-            <strong>File {comp['file1']+1} ↔ File {comp['file2']+1}</strong>: {comp['similarity']*100:.1f}% similarity
-            <div style="margin-left: 20px; color: #666; font-size: 14px;">
-                {comp['details']['token_counts']['code1']} vs {comp['details']['token_counts']['code2']} tokens,
-                {len(comp['details']['matched_sections'])} matching sections
+    html += f"""
+                </div>
             </div>
-        </div>
+            
+            <div class="similarity-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #10b981;"></div>
+                    <span>شباهت بالا (&gt;70%)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #f59e0b;"></div>
+                    <span>شباهت متوسط (40-70%)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ef4444;"></div>
+                    <span>شباهت کم (&lt;40%)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="badge">⚡ آستانه: 65%</span>
+                </div>
+            </div>
+            
+            <h2>📋 مقایسه‌های دقیق</h2>
+            <div class="comparisons-grid">
+    """
+    
+    for comp in results['comparisons'][:12]: 
+        similarity = comp['similarity'] * 100
+        if similarity > 70:
+            color = '#10b981'
+        elif similarity > 40:
+            color = '#f59e0b'
+        else:
+            color = '#ef4444'
+        
+        html += f'''
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <span class="file-badge">فایل {comp['file1']+1}</span>
+                        <span style="color: #64748b;">↔</span>
+                        <span class="file-badge">فایل {comp['file2']+1}</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="similarity-circle" style="border-color: {color}; color: {color};">
+                            {similarity:.0f}%
+                        </div>
+                        <div style="margin-top: 10px; font-weight: 600; color: #e2e8f0;">
+                            شباهت کلی
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #94a3b8;">توکن‌های فایل {comp['file1']+1}:</span>
+                            <span style="color: #60a5fa; font-weight: 600;">{comp['details']['token_counts']['code1']:,}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #94a3b8;">توکن‌های فایل {comp['file2']+1}:</span>
+                            <span style="color: #60a5fa; font-weight: 600;">{comp['details']['token_counts']['code2']:,}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #94a3b8;">بخش‌های مشابه:</span>
+                            <span style="color: #60a5fa; font-weight: 600;">{len(comp['details']['matched_sections'])}</span>
+                        </div>
+                    </div>
+                    <div class="token-stats">
+                        <span>🎯 {comp['details']['token_counts']['common_types']} نوع مشترک</span>
+                        <span>📊 {comp['details'].get('overall_similarity', comp['similarity']*100):.1f}%</span>
+                    </div>
+                </div>
         '''
     
-    if len(results['comparisons']) > 10:
-        html += f'<p>... and {len(results["comparisons"]) - 10} more comparisons</p>'
+    html += f'''
+            </div>
+    '''
+    
+    if len(results['comparisons']) > 12:
+        html += f'''
+            <div style="text-align: center; margin-top: 20px; padding: 15px; background: #0f172a; border-radius: 8px; border: 1px solid #334155;">
+                <span style="color: #94a3b8;">✨ و {len(results['comparisons']) - 12} مقایسه دیگر ...</span>
+            </div>
+        '''
     
     html += f'''
-            <p style="text-align: center; color: #666; margin-top: 30px;">
-                Generated by TokenSimilarityAnalyzer - Phase 1<br>
-                Matrix comparison of {results['num_files']} files
-            </p>
+            <div style="display: flex; align-items: center; gap: 15px; margin-top: 30px; padding: 20px; background: #0f172a; border-radius: 8px; border: 1px solid #334155;">
+                <span class="phase-badge">تحلیل فاز ۱</span>
+                <span style="color: #94a3b8;">
+                    ⏱️ {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+                </span>
+                <span style="color: #94a3b8; margin-right: auto;">
+                    🎯 Token-based Similarity
+                </span>
+            </div>
+            
+            <div class="footer">
+                <p>تولید شده توسط TokenSimilarityAnalyzer - فاز ۱</p>
+                <p style="font-size: 12px; margin-top: 10px; color: #475569;">
+                    تحلیل مبتنی بر توکن • {results['num_files']} فایل • {len(results['comparisons'])} جفت
+                </p>
+            </div>
         </div>
     </body>
     </html>
     '''
     
     return html
-
-
 def main():
     parser = argparse.ArgumentParser(
         description='Token-based Code Similarity Analyzer - Phase 1',

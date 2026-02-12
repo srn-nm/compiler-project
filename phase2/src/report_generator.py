@@ -1,8 +1,6 @@
 from typing import Dict, Any, Optional
 from datetime import datetime
 from anytree import Node, RenderTree
-import html
-
 
 def ast_to_anytree(ast_dict: Optional[Dict], parent: Optional[Node] = None) -> Optional[Node]:
     if not ast_dict:

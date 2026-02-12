@@ -10,8 +10,8 @@ from typing import Dict, List, Set, Any, Tuple, Optional
 from pathlib import Path
 
 from .cfg_builder import ControlFlowGraph, CFGBuilder, CFGNode, NodeType
-from .graph_similarity import GraphSimilarity
-from phase3.utils.helpers import normalize_code, save_json, load_json
+from phase3.analyzer.graph_similarity import GraphSimilarity
+from ..utils.helpers import normalize_code, save_json, load_json
 
 
 class CFGAnalyzer:
@@ -57,6 +57,15 @@ class CFGAnalyzer:
 
         return default_config
 
+    def _count_ast_nodes(self, ast_node: Dict) -> int:
+        """Count nodes in AST dictionary"""
+        if not ast_node:
+            return 0
+        count = 1
+        for child in ast_node.get('children', []):
+            count += self._count_ast_nodes(child)
+        return count
+
     def build_cfg_from_ast(self, ast_data: Dict) -> ControlFlowGraph:
         """Build CFG from AST data with error handling"""
         try:
@@ -76,10 +85,13 @@ class CFGAnalyzer:
             ast2 = phase2_results.get('ast2_dict')
             
             if ast1 and ast2:
+                print(f"   📦 AST1: {self._count_ast_nodes(ast1)} nodes")
+                print(f"   📦 AST2: {self._count_ast_nodes(ast2)} nodes")
                 return ast1, ast2
         
         # Create mock ASTs for testing
         from .cfg_builder import create_mock_ast
+        print("   ⚠️ Using mock AST (Phase 2 AST not available)")
         return create_mock_ast(), create_mock_ast()
 
     def analyze_code_pair(self, code1: str, code2: str,
@@ -93,8 +105,13 @@ class CFGAnalyzer:
             ast1, ast2 = self._get_asts_from_phase2(code1, code2, phase2_results)
 
         # Build CFGs
+        print(f"   🏗️  Building CFG1...")
         cfg1 = self.build_cfg_from_ast(ast1)
+        print(f"   🏗️  Building CFG2...")
         cfg2 = self.build_cfg_from_ast(ast2)
+        
+        print(f"   🔗 CFG1: {len(cfg1.nodes)} nodes, {len(cfg1.edges)} edges")
+        print(f"   🔗 CFG2: {len(cfg2.nodes)} nodes, {len(cfg2.edges)} edges")
 
         # Calculate all similarity metrics
         metrics = {}
@@ -139,7 +156,7 @@ class CFGAnalyzer:
                 'code1': cfg_stats1,
                 'code2': cfg_stats2
             },
-            'similar_components': similar_components[:10],  # Top 10
+            'similar_components': similar_components[:10],
             'matched_paths_count': len(matched_paths),
             'matched_paths_sample': matched_paths[:5],
             'is_plagiarism_suspected': overall_score >= (self.config['plagiarism_threshold'] * 100),
@@ -360,12 +377,6 @@ class CFGAnalyzer:
         
         return min(1.0, similarity)
 
-    def _node_similarity_simple(self, node1: CFGNode, node2: CFGNode) -> float:
-        """Simplified node similarity for GED"""
-        if node1.type == node2.type:
-            return 0.8
-        return 0.2
-
     def _find_optimal_matching(self, sim_matrix: np.ndarray) -> List[Tuple[int, int]]:
         """Greedy optimal matching"""
         n1, n2 = sim_matrix.shape
@@ -419,7 +430,8 @@ class CFGAnalyzer:
                 if not edge_exists:
                     mismatched += 1
 
-        return mismatched / max(len(cfg1.edges), len(cfg2.edges), 1)
+        total_edges = max(len(cfg1.edges), len(cfg2.edges), 1)
+        return mismatched / total_edges
 
     def _extract_control_subgraphs(self, cfg: ControlFlowGraph) -> List[Dict]:
         """Extract subgraphs for control structures"""
@@ -511,7 +523,7 @@ class CFGAnalyzer:
                         'similarity': round(len_sim, 3)
                     })
         
-        return matches[:10]  # Return top 10
+        return matches[:10]
 
     def _get_node_type_distribution(self, cfg: ControlFlowGraph) -> Dict[str, int]:
         """Get distribution of node types"""
@@ -524,7 +536,7 @@ class CFGAnalyzer:
     def _get_path_signature(self, path: List[int], cfg: ControlFlowGraph) -> List[str]:
         """Create signature for execution path"""
         signature = []
-        for node_id in path[:10]:  # Limit length
+        for node_id in path[:10]:
             if node_id in cfg.nodes:
                 node = cfg.nodes[node_id]
                 signature.append(f"{node.type.value}")

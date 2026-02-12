@@ -17,7 +17,7 @@ def visualize_cfg(cfg: ControlFlowGraph, max_nodes: int = 20) -> str:
     lines.append("=" * 70)
     
     # Basic info
-    lines.append(f"\n📊 Statistics:")
+    lines.append(f"\n Statistics:")
     lines.append(f"  • Nodes: {len(cfg.nodes)}")
     lines.append(f"  • Edges: {len(cfg.edges)}")
     lines.append(f"  • Entry: {cfg.entry_node_id}")
@@ -26,14 +26,14 @@ def visualize_cfg(cfg: ControlFlowGraph, max_nodes: int = 20) -> str:
     
     # Control structures
     controls = cfg.get_control_structures_count()
-    lines.append(f"\n🎯 Control Structures:")
+    lines.append(f"\n Control Structures:")
     lines.append(f"  • Decisions: {controls.get('decisions', 0)}")
     lines.append(f"  • Loops: {controls.get('loops', 0)}")
     lines.append(f"  • Functions: {controls.get('functions', 0)}")
     lines.append(f"  • Returns: {controls.get('returns', 0)}")
     
     # Nodes
-    lines.append(f"\n📌 Nodes (first {max_nodes}):")
+    lines.append(f"\n Nodes (first {max_nodes}):")
     displayed = 0
     for node_id, node in cfg.nodes.items():
         if displayed >= max_nodes:
@@ -49,7 +49,7 @@ def visualize_cfg(cfg: ControlFlowGraph, max_nodes: int = 20) -> str:
         displayed += 1
     
     # Edges
-    lines.append(f"\n🔗 Edges (first {max_nodes}):")
+    lines.append(f"\n Edges (first {max_nodes}):")
     displayed = 0
     for from_id, to_id, data in cfg.edges:
         if displayed >= max_nodes:
@@ -64,7 +64,7 @@ def visualize_cfg(cfg: ControlFlowGraph, max_nodes: int = 20) -> str:
         displayed += 1
     
     # Sample paths
-    lines.append(f"\n🛤️  Sample Paths:")
+    lines.append(f"\n  Sample Paths:")
     paths = cfg.get_execution_paths(max_paths=3)
     for i, path in enumerate(paths, 1):
         path_str = " → ".join(map(str, path[:10]))
@@ -86,22 +86,22 @@ def generate_cfg_report(results: Dict[str, Any]) -> str:
     # Score
     if 'combined_similarity_score' in results:
         score = results['combined_similarity_score']
-        lines.append(f"\n🎯 Combined Score (3 phases): {score:.2f}%")
+        lines.append(f"\n Combined Score (3 phases): {score:.2f}%")
     else:
         score = results.get('cfg_similarity_score', 0)
-        lines.append(f"\n🎯 CFG Similarity Score: {score:.2f}%")
+        lines.append(f"\n CFG Similarity Score: {score:.2f}%")
     
     # Decision
     is_suspected = results.get('is_plagiarism_suspected', False)
     threshold = results.get('threshold_used', 0.7) * 100
-    lines.append(f"\n⚖️  Verdict:")
+    lines.append(f"\n  Verdict:")
     lines.append(f"  • Threshold: {threshold:.0f}%")
-    lines.append(f"  • Result: {'⚠️ SIMILAR' if is_suspected else '✅ NOT SIMILAR'}")
+    lines.append(f"  • Result: {' SIMILAR' if is_suspected else ' NOT SIMILAR'}")
     
     # Metrics
     if 'cfg_similarity_metrics' in results:
         metrics = results['cfg_similarity_metrics']
-        lines.append(f"\n📊 Similarity Metrics:")
+        lines.append(f"\n Similarity Metrics:")
         for key, value in metrics.items():
             if isinstance(value, float):
                 lines.append(f"  • {key:25}: {value*100:6.2f}%")
@@ -109,7 +109,7 @@ def generate_cfg_report(results: Dict[str, Any]) -> str:
     # Statistics
     if 'cfg_statistics' in results:
         stats = results['cfg_statistics']
-        lines.append(f"\n📈 CFG Statistics:")
+        lines.append(f"\n CFG Statistics:")
         
         if 'code1' in stats:
             s1 = stats['code1']
@@ -142,7 +142,7 @@ def generate_cfg_dot_file(cfg: ControlFlowGraph, filename: str) -> None:
     try:
         import pydot
     except ImportError:
-        print("⚠️ pydot not installed. Install: pip install pydot")
+        print(" pydot not installed. Install: pip install pydot")
         return
     
     graph = pydot.Dot(graph_type='digraph', rankdir='TB')
@@ -177,20 +177,20 @@ def generate_cfg_dot_file(cfg: ControlFlowGraph, filename: str) -> None:
     
     # Save
     graph.write(filename, format='raw')
-    print(f"✅ DOT file saved: {filename}")
+    print(f" DOT file saved: {filename}")
 
 
 def _get_node_color(node_type: NodeType) -> str:
     """Get color for node type"""
     colors = {
-        NodeType.ENTRY: '#90EE90',      # Light green
-        NodeType.EXIT: '#FFB6C1',       # Light pink
-        NodeType.BASIC_BLOCK: '#E0FFFF', # Light cyan
-        NodeType.DECISION: '#FFD700',    # Gold
-        NodeType.LOOP: '#FFA07A',        # Light salmon
-        NodeType.FUNCTION: '#DDA0DD',    # Plum
-        NodeType.RETURN: '#87CEEB',      # Sky blue
-        NodeType.CALL: '#F0E68C'         # Khaki
+        NodeType.ENTRY: '#90EE90',      
+        NodeType.EXIT: '#FFB6C1',       
+        NodeType.BASIC_BLOCK: '#E0FFFF',
+        NodeType.DECISION: '#FFD700',    
+        NodeType.LOOP: '#FFA07A',       
+        NodeType.FUNCTION: '#DDA0DD',  
+        NodeType.RETURN: '#87CEEB',    
+        NodeType.CALL: '#F0E68C'        
     }
     return colors.get(node_type, '#FFFFFF')
 

@@ -1,0 +1,150 @@
+{
+  "cfg_similarity_score": 80.11,
+  "cfg_similarity_metrics": {
+    "structural_similarity": 0.8485,
+    "graph_edit_similarity": 0.8689,
+    "subgraph_similarity": 0.6667,
+    "path_similarity": 0.8424,
+    "node_type_similarity": 0.9987
+  },
+  "cfg_statistics": {
+    "code1": {
+      "node_count": 39,
+      "edge_count": 51,
+      "entry_node": 1,
+      "exit_node": 2,
+      "cyclomatic_complexity": 14,
+      "execution_paths": 11,
+      "control_structures": {
+        "decisions": 3,
+        "loops": 3,
+        "functions": 6,
+        "returns": 4
+      }
+    },
+    "code2": {
+      "node_count": 54,
+      "edge_count": 72,
+      "entry_node": 1,
+      "exit_node": 2,
+      "cyclomatic_complexity": 20,
+      "execution_paths": 16,
+      "control_structures": {
+        "decisions": 5,
+        "loops": 4,
+        "functions": 9,
+        "returns": 6
+      }
+    }
+  },
+  "similar_components": [
+    {
+      "type": "decision",
+      "node1": 5,
+      "node2": 5,
+      "similarity": 1.0
+    },
+    {
+      "type": "decision",
+      "node1": 5,
+      "node2": 7,
+      "similarity": 1.0
+    },
+    {
+      "type": "decision",
+      "node1": 5,
+      "node2": 9,
+      "similarity": 1.0
+    },
+    {
+      "type": "decision",
+      "node1": 5,
+      "node2": 41,
+      "similarity": 1.0
+    },
+    {
+      "type": "decision",
+      "node1": 38,
+      "node2": 53,
+      "similarity": 1.0
+    },
+    {
+      "type": "loop",
+      "node1": 8,
+      "node2": 12,
+      "similarity": 1.0
+    },
+    {
+      "type": "loop",
+      "node1": 8,
+      "node2": 18,
+      "similarity": 1.0
+    },
+    {
+      "type": "loop",
+      "node1": 8,
+      "node2": 26,
+      "similarity": 1.0
+    },
+    {
+      "type": "loop",
+      "node1": 8,
+      "node2": 44,
+      "similarity": 1.0
+    },
+    {
+      "type": "loop",
+      "node1": 14,
+      "node2": 12,
+      "similarity": 1.0
+    }
+  ],
+  "matched_paths_count": 10,
+  "matched_paths_sample": [
+    {
+      "path1_index": 0,
+      "path2_index": 0,
+      "length1": 4,
+      "length2": 4,
+      "similarity": 1.0
+    },
+    {
+      "path1_index": 0,
+      "path2_index": 5,
+      "length1": 4,
+      "length2": 4,
+      "similarity": 1.0
+    },
+    {
+      "path1_index": 0,
+      "path2_index": 6,
+      "length1": 4,
+      "length2": 4,
+      "similarity": 1.0
+    },
+    {
+      "path1_index": 0,
+      "path2_index": 7,
+      "length1": 4,
+      "length2": 4,
+      "similarity": 1.0
+    },
+    {
+      "path1_index": 0,
+      "path2_index": 8,
+      "length1": 4,
+      "length2": 4,
+      "similarity": 1.0
+    }
+  ],
+  "is_plagiarism_suspected": "True",
+  "threshold_used": 0.7,
+  "config_used": {
+    "weights": {
+      "structural": 0.35,
+      "graph_edit": 0.35,
+      "subgraph": 0.3
+    },
+    "threshold": 0.7
+  }
+}
