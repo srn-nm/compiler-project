@@ -4117,15 +4117,15 @@
     "count2": 50,
     "common_count": 15,
     "common_names": [
-      "int",
-      "grades",
-      "__name__",
       "range",
-      "__init__",
-      "self",
-      "append",
+      "copy",
+      "int",
       "primes",
+      "self",
+      "print",
+      "name",
       "age",
+      "i",
       "j"
     ],
     "patterns": {

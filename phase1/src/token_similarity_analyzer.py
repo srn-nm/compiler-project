@@ -2,9 +2,8 @@ from antlr4 import *
 from grammers.generated.python.Python3Lexer import Python3Lexer
 from collections import Counter
 import math
-import json
-from typing import List, Dict, Any, Tuple, Optional, Set
-import html  # برای escape کردن کاراکترهای HTML
+from typing import List, Dict, Any
+import html 
 
 class TokenSimilarityAnalyzer:
     def __init__(self, config: Dict[str, Any] = None):
@@ -12,18 +11,15 @@ class TokenSimilarityAnalyzer:
         self.config = config or {}
         
     def tokenize_code(self, code: str) -> List[Dict[str, Any]]:
-        """Convert Python code to token stream with position information"""
         input_stream = InputStream(code)
         self.lexer = Python3Lexer(input_stream)
         token_stream = CommonTokenStream(self.lexer)
         token_stream.fill()
         
-        # Filter out whitespace and comments, keep position info
         tokens = []
         for token in token_stream.tokens:
-            if token.type != -1:  # Skip EOF
+            if token.type != -1:  # skip EOF
                 token_name = self.lexer.symbolicNames[token.type]
-                # Skip hidden tokens (whitespace, newlines)
                 if token.channel != Token.HIDDEN_CHANNEL:
                     tokens.append({
                         'type': token_name,
@@ -35,7 +31,6 @@ class TokenSimilarityAnalyzer:
         return tokens
     
     def normalize_tokens(self, tokens: List[Dict[str, Any]]) -> List[str]:
-        """Normalize tokens for comparison (ignore variable names)"""
         normalized = []
         for token in tokens:
             if token['type'] in ['NAME', 'IDENTIFIER']:
@@ -49,7 +44,6 @@ class TokenSimilarityAnalyzer:
         return normalized
     
     def calculate_similarity(self, code1: str, code2: str) -> Dict[str, Any]:
-        """Calculate token-based similarity between two code snippets"""
         tokens1 = self.tokenize_code(code1)
         tokens2 = self.tokenize_code(code2)
         
@@ -107,7 +101,6 @@ class TokenSimilarityAnalyzer:
                 'code1_lines': code1.count('\n') + 1,
                 'code2_lines': code2.count('\n') + 1
             },
-            # 🟢 اضافه کردن کد اصلی برای نمایش در HTML
             'original_code1': code1,
             'original_code2': code2
         }
@@ -163,9 +156,7 @@ class TokenSimilarityAnalyzer:
             return 1.0
         return lcs_length / max_len
     
-    def find_matching_sections(self, tokens1: List[Dict], tokens2: List[Dict], 
-                              min_length: int = 3) -> List[Dict]:
-        """Identify exactly matching sections with position information"""
+    def find_matching_sections(self, tokens1: List[Dict], tokens2: List[Dict], min_length: int = 3) -> List[Dict]:
         matches = []
         text1 = [f"{t['type']}:{t['text']}" for t in tokens1]
         text2 = [f"{t['type']}:{t['text']}" for t in tokens2]
@@ -280,16 +271,11 @@ class TokenSimilarityAnalyzer:
             'num_files': n
         }
     
-    # 🟢 **COMPLETELY REWRITTEN: HTML با هایلایت واقعی کد**
-    def generate_html_report(self, result: Dict, file1_name: str = "code1", 
-                            file2_name: str = "code2") -> str:
-        """Generate HTML report with visual code highlighting"""
+    def generate_html_report(self, result: Dict, file1_name: str = "code1", file2_name: str = "code2") -> str:
         
-        # دریافت کدهای اصلی
         code1 = result.get('original_code1', '')
         code2 = result.get('original_code2', '')
         
-        # هایلایت کردن بخش‌های مشابه در کد
         highlighted_code1 = self._highlight_code(code1, result['matched_sections'], is_first=True)
         highlighted_code2 = self._highlight_code(code2, result['matched_sections'], is_first=False)
         
@@ -506,7 +492,7 @@ class TokenSimilarityAnalyzer:
         </head>
         <body>
             <div class="container">
-                <h1>🔍 Code Similarity Analysis Report - Phase 1</h1>
+                <h1>Code Similarity Analysis Report - Phase 1</h1>
                 
                 <div class="score-card">
                     <div class="score-number">{result['overall_similarity']:.1f}%</div>
@@ -518,20 +504,19 @@ class TokenSimilarityAnalyzer:
                 
                 <div style="display: flex; justify-content: space-between; margin: 20px 0;">
                     <div style="background: #e8f5e9; padding: 15px; border-radius: 10px; flex: 1; margin-right: 10px;">
-                        <strong>📁 File 1:</strong> {file1_name}<br>
+                        <strong>File 1:</strong> {file1_name}<br>
                         <small>{result['code_lengths']['code1_lines']} lines • {result['token_counts']['code1']} tokens • {result['token_counts']['unique_types1']} unique types</small>
                     </div>
                     <div style="background: #e8f5e9; padding: 15px; border-radius: 10px; flex: 1; margin-left: 10px;">
-                        <strong>📁 File 2:</strong> {file2_name}<br>
+                        <strong>File 2:</strong> {file2_name}<br>
                         <small>{result['code_lengths']['code2_lines']} lines • {result['token_counts']['code2']} tokens • {result['token_counts']['unique_types2']} unique types</small>
                     </div>
                 </div>
                 
-                <h2>📊 Similarity Metrics</h2>
+                <h2>Similarity Metrics</h2>
                 <div class="metrics-grid">
         """
         
-        # Add metric cards
         for metric, value in result['metrics'].items():
             if isinstance(value, (int, float)) and metric not in ['normalized_jaccard']:
                 metric_name = metric.replace('_', ' ').title()
@@ -547,18 +532,18 @@ class TokenSimilarityAnalyzer:
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0;">
                     <div style="background: #f8f9fa; padding: 20px; border-radius: 12px;">
-                        <h3 style="margin-top: 0; color: #1a73e8;">🎯 Matching Sections</h3>
+                        <h3 style="margin-top: 0; color: #1a73e8;">Matching Sections</h3>
                         <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">{len(result['matched_sections'])}</p>
                         <p style="color: #666;">matching code sections found</p>
                     </div>
                     <div style="background: #f8f9fa; padding: 20px; border-radius: 12px;">
-                        <h3 style="margin-top: 0; color: #1a73e8;">🔤 Variable Analysis</h3>
+                        <h3 style="margin-top: 0; color: #1a73e8;">Variable Analysis</h3>
                         <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">{result['variable_patterns']['common_count']}</p>
                         <p style="color: #666;">common variable names</p>
                     </div>
                 </div>
                 
-                <h2>🔍 Visual Code Comparison</h2>
+                <h2>Visual Code Comparison</h2>
                 <div class="code-comparison">
                     <div class="code-box">
                         <div class="code-header">
@@ -581,10 +566,9 @@ class TokenSimilarityAnalyzer:
                 </div>
                 
                 <div class="match-info">
-                    <h3 style="margin-top: 0; color: #856404;">🎯 Matching Sections Details</h3>
+                    <h3 style="margin-top: 0; color: #856404;">Matching Sections Details</h3>
         """
         
-        # Add match details
         for i, match in enumerate(result['matched_sections'][:10], 1):
             html += f"""
                     <div style="margin: 15px 0; padding: 15px; background: white; border-radius: 8px; border: 1px solid #ffeeba;">
@@ -601,7 +585,7 @@ class TokenSimilarityAnalyzer:
         html += f"""
                 </div>
                 
-                <h2>📈 Token Statistics</h2>
+                <h2>Token Statistics</h2>
                 <table class="stats-table">
                     <tr>
                         <th>Metric</th>
@@ -635,14 +619,13 @@ class TokenSimilarityAnalyzer:
                     </tr>
                 </table>
                 
-                <h2>🔤 Most Common Tokens</h2>
+                <h2>Most Common Tokens</h2>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
                     <div>
                         <h4 style="color: #1a73e8;">File 1: {file1_name}</h4>
                         <div class="token-cloud">
         """
         
-        # Add token frequencies
         for token, count in list(result['token_frequencies']['code1'].items())[:15]:
             html += f'<span class="token-tag">{token} <strong>{count}</strong></span>'
         
@@ -665,7 +648,7 @@ class TokenSimilarityAnalyzer:
                 <div class="footer">
                     <p>Generated by TokenSimilarityAnalyzer - Phase 1</p>
                     <p style="font-size: 12px;">
-                        🟡 Highlighted sections show identical token sequences<br>
+                        Highlighted sections show identical token sequences<br>
                         Analysis based on lexical tokens, ignoring whitespace and comments
                     </p>
                 </div>
@@ -676,13 +659,9 @@ class TokenSimilarityAnalyzer:
         
         return html
     
-    # 🟢 **NEW: تابع هایلایت کردن کد**
     def _highlight_code(self, code: str, matches: List[Dict], is_first: bool = True) -> str:
-        """Highlight matching sections in code"""
         lines = code.split('\n')
         highlighted_lines = []
-        
-        # Create a set of line numbers that need highlighting
         highlight_lines = set()
         line_ranges = []
         
@@ -698,12 +677,10 @@ class TokenSimilarityAnalyzer:
             for line_num in range(start_line, end_line + 1):
                 highlight_lines.add(line_num)
         
-        # Generate HTML lines
         for i, line in enumerate(lines, 1):
             line_escaped = html.escape(line)
             line_class = 'highlight-line' if i in highlight_lines else ''
             
-            # Check if this line is part of a match range
             range_info = ''
             for start, end in line_ranges:
                 if start <= i <= end:
@@ -718,5 +695,4 @@ class TokenSimilarityAnalyzer:
                 f'</span>'
                 f'</div>'
             )
-        
         return '\n'.join(highlighted_lines)

@@ -12,7 +12,6 @@ from src.token_similarity_analyzer import TokenSimilarityAnalyzer
 
 
 def read_code_from_file(filename: str) -> str:
-    """Read code from file"""
     try:
         with open(filename, 'r', encoding='utf-8') as f:
             return f.read()
@@ -22,7 +21,6 @@ def read_code_from_file(filename: str) -> str:
 
 
 def detect_language_from_filename(filename: str) -> str:
-    """Detect language from file extension"""
     ext = Path(filename).suffix.lower()
     
     extensions_map = {
@@ -30,36 +28,26 @@ def detect_language_from_filename(filename: str) -> str:
         '.java': 'java',
         '.cpp': 'cpp', '.cc': 'cpp', '.cxx': 'cpp', '.hpp': 'cpp', '.h': 'cpp',
         '.c': 'c',
-        '.js': 'javascript', '.ts': 'typescript',
-        '.go': 'go',
-        '.rs': 'rust',
-        '.php': 'php',
-        '.rb': 'ruby',
-        '.cs': 'csharp',
     }
     
     return extensions_map.get(ext, 'unknown')
 
 
 def save_json_report(result: Dict, output_path: str):
-    """Save JSON report"""
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(result, f, indent=2, ensure_ascii=False)
-    print(f"  📄 JSON: {output_path}")
+    print(f"JSON: {output_path}")
 
 
-# 🟢 **FIXED: اصلاح تابع save_html_report**
 def save_html_report(analyzer: TokenSimilarityAnalyzer, result: Dict, 
                     file1_name: str, file2_name: str, output_path: str):
-    """Save HTML visual report"""
     html_content = analyzer.generate_html_report(result, file1_name, file2_name)
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html_content)
-    print(f"  🌐 HTML: {output_path}")
+    print(f"HTML: {output_path}")
 
 
 def save_text_report(result: Dict, file1_name: str, file2_name: str, output_path: str):
-    """Save text report"""
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write("=" * 70 + "\n")
         f.write("CODE SIMILARITY ANALYSIS REPORT - PHASE 1\n")
@@ -91,11 +79,10 @@ def save_text_report(result: Dict, file1_name: str, file2_name: str, output_path
         f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write("=" * 70 + "\n")
     
-    print(f"  📝 Text: {output_path}")
+    print(f"Text: {output_path}")
 
 
 def format_metric_value(value):
-    """Format metric value for display"""
     if isinstance(value, (int, float)):
         return f"{value:.4f}"
     elif isinstance(value, list):
@@ -111,7 +98,6 @@ def format_metric_value(value):
 
 
 def generate_matrix_html(results: Dict, filenames: List[str]) -> str:
-    """Generate HTML report for matrix comparison"""
     html = f"""
     <!DOCTYPE html>
     <html>
@@ -169,7 +155,7 @@ def generate_matrix_html(results: Dict, filenames: List[str]) -> str:
     </head>
     <body>
         <div class="container">
-            <h1>🔍 Code Similarity Matrix Analysis</h1>
+            <h1>Code Similarity Matrix Analysis</h1>
             
             <div class="stats">
                 <strong>Files Analyzed:</strong> {results['num_files']}<br>
@@ -182,12 +168,10 @@ def generate_matrix_html(results: Dict, filenames: List[str]) -> str:
                     <div class="matrix-label"></div>
     """
     
-    # Column headers
     for i in range(results['num_files']):
         html += f'<div class="matrix-label">File {i+1}</div>'
     html += '</div>'
     
-    # Matrix rows
     matrix = results['similarity_matrix']
     for i in range(results['num_files']):
         html += f'<div class="matrix-row">'
@@ -195,7 +179,6 @@ def generate_matrix_html(results: Dict, filenames: List[str]) -> str:
         
         for j in range(results['num_files']):
             val = matrix[i][j]
-            # Color gradient from red (0%) to green (100%)
             color = f'hsl({120 * val}, 70%, 45%)'
             html += f'<div class="matrix-cell" style="background-color: {color};">{val*100:.0f}%</div>'
         
@@ -203,9 +186,8 @@ def generate_matrix_html(results: Dict, filenames: List[str]) -> str:
     
     html += '</div>'
     
-    # Detailed comparisons
     html += '<h2>Detailed Comparisons</h2>'
-    for comp in results['comparisons'][:10]:  # Show top 10
+    for comp in results['comparisons'][:10]: 
         html += f'''
         <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 4px;">
             <strong>File {comp['file1']+1} ↔ File {comp['file2']+1}</strong>: {comp['similarity']*100:.1f}% similarity
@@ -259,7 +241,6 @@ Examples:
     
     args = parser.parse_args()
     
-    # Read codes
     codes = []
     languages = []
     filenames = []
@@ -275,12 +256,10 @@ Examples:
         else:
             languages.append(args.language)
     
-    # Create analyzer
     analyzer = TokenSimilarityAnalyzer()
     
     if args.matrix and len(codes) > 1:
-        # Matrix analysis
-        print("\n🔍 Performing matrix analysis...")
+        print("\nPerforming matrix analysis...")
         results = analyzer.compare_multiple_codes(codes)
         
         if args.verbose:
@@ -291,7 +270,6 @@ Examples:
                 row = [f"{val*100:5.1f}%" for val in matrix[i]]
                 print(f"File{i+1}: {row}")
         
-        # Save results
         output_base = args.output
         if args.format in ['json', 'all']:
             save_json_report(results, f"{output_base}_matrix.json")
@@ -299,36 +277,31 @@ Examples:
             html_content = generate_matrix_html(results, filenames)
             with open(f"{output_base}_matrix.html", 'w', encoding='utf-8') as f:
                 f.write(html_content)
-            print(f"  🌐 HTML: {output_base}_matrix.html")
+            print(f"HTML: {output_base}_matrix.html")
         
-        print(f"\n✅ Matrix analysis complete!")
+        print(f"\nMatrix analysis complete!")
         
     elif len(codes) == 2:
-        # Pairwise analysis
         print(f"\nAnalyzing similarity between two files...")
         result = analyzer.calculate_similarity(codes[0], codes[1])
         
-        # Display results
         if args.verbose:
             print("=" * 70)
             print("CODE SIMILARITY ANALYSIS REPORT - PHASE 1")
             print("=" * 70)
             
-            # Languages
-            print(f"\n📁 Files:")
+            print(f"\nFiles:")
             print(f"  File 1: {filenames[0]} ({languages[0]})")
             print(f"  File 2: {filenames[1]} ({languages[1]})")
             if languages[0] != languages[1]:
-                print("   ⚠️  Warning: Different languages!")
+                print("Warning: Different languages!")
             
-            # Overall similarity
             overall = result['overall_similarity']
             normalized = result.get('normalized_similarity', 0)
-            print(f"\n📊 Overall Similarity: {overall:.1f}%")
+            print(f"\nOverall Similarity: {overall:.1f}%")
             print(f"   Normalized Similarity: {normalized:.1f}% (ignoring variable names)")
             
-            # Detailed metrics
-            print(f"\n📈 Detailed Metrics:")
+            print(f"\nDetailed Metrics:")
             metrics_count = 0
             for metric, value in result['metrics'].items():
                 if isinstance(value, (int, float)):
@@ -336,31 +309,28 @@ Examples:
                     print(f"  {metric_name:30}: {value*100:.2f}%")
                     metrics_count += 1
             
-            # Token statistics
-            print(f"\n🔢 Token Statistics:")
+            print(f"\nToken Statistics:")
             counts = result['token_counts']
             print(f"  File 1: {counts['code1']} tokens ({counts['unique_types1']} unique types)")
             print(f"  File 2: {counts['code2']} tokens ({counts['unique_types2']} unique types)")
             print(f"  Common token types: {counts['common_types']}")
             
-            # Code length
             lengths = result['code_lengths']
-            print(f"\n📏 Code Size:")
+            print(f"\nCode Size:")
             print(f"  File 1: {lengths['code1_lines']} lines, {lengths['code1_chars']} characters")
             print(f"  File 2: {lengths['code2_lines']} lines, {lengths['code2_chars']} characters")
             
-            # Variable analysis
+            # variable analysis
             if 'variable_patterns' in result:
                 vars_data = result['variable_patterns']
-                print(f"\n🔤 Variable Analysis:")
+                print(f"\nVariable Analysis:")
                 print(f"  Variables: {vars_data['count1']} vs {vars_data['count2']}")
                 print(f"  Common variable names: {vars_data['common_count']}")
                 if vars_data['common_names']:
                     print(f"  Examples: {', '.join(vars_data['common_names'][:5])}")
             
-            # Matching sections
             if result['matched_sections']:
-                print(f"\n🎯 Matching Sections ({len(result['matched_sections'])} found):")
+                print(f"\nMatching Sections ({len(result['matched_sections'])} found):")
                 for i, match in enumerate(result['matched_sections'][:5], 1):
                     print(f"  Match {i}: {match['length']} tokens")
                     print(f"    Lines {match['line_numbers']['start1']}-{match['line_numbers']['end1']} ↔ Lines {match['line_numbers']['start2']}-{match['line_numbers']['end2']}")
@@ -372,36 +342,34 @@ Examples:
                 if len(result['matched_sections']) > 5:
                     print(f"    ... and {len(result['matched_sections']) - 5} more matches")
             else:
-                print(f"\n❌ No matching sections found.")
+                print(f"\nNo matching sections found.")
             
-            # Token frequencies
-            print(f"\n📊 Most Common Tokens:")
+            # token frequencies
+            print(f"\nMost Common Tokens:")
             freq1 = result['token_frequencies']['code1']
             freq2 = result['token_frequencies']['code2']
             print(f"  File 1: {', '.join([f'{k}({v})' for k, v in list(freq1.items())[:5]])}")
             print(f"  File 2: {', '.join([f'{k}({v})' for k, v in list(freq2.items())[:5]])}")
         
-        # 🟢 **FIXED: ذخیره نتایج با فرمت‌های مختلف**
         output_base = args.output
         if output_base.endswith('.json') or output_base.endswith('.html') or output_base.endswith('.txt'):
             output_base = os.path.splitext(output_base)[0]
         
-        print(f"\n💾 Saving reports...")
+        print(f"\nSaving reports...")
         
         if args.format in ['json', 'all']:
             save_json_report(result, f"{output_base}.json")
         if args.format in ['html', 'all'] or args.visual:
-            # 🟢 **آنجا که analyzer را پاس می‌دهیم، نه result**
             save_html_report(analyzer, result, filenames[0], filenames[1], f"{output_base}.html")
         if args.format in ['text', 'all']:
             save_text_report(result, filenames[0], filenames[1], f"{output_base}.txt")
         
-        print(f"\n✅ Analysis complete!")
-        print(f"📊 Overall similarity: {result['overall_similarity']:.1f}%")
+        print(f"\nAnalysis complete!")
+        print(f"Overall similarity: {result['overall_similarity']:.1f}%")
         
     else:
-        print("❌ Error: For pairwise analysis exactly 2 files are required.")
-        print("   For matrix analysis, use --matrix flag with at least 2 files.")
+        print("Error: For pairwise analysis exactly 2 files are required.")
+        print("For matrix analysis, use --matrix flag with at least 2 files.")
         sys.exit(1)
 
 
