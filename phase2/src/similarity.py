@@ -1,7 +1,3 @@
-"""
-Similarity calculation and integration functions for Phase 2
-"""
-
 import json
 from typing import Dict, Any, Optional
 from .analyzer import Phase2ASTSimilarity
@@ -9,7 +5,6 @@ from .analyzer import Phase2ASTSimilarity
 
 def calculate_ast_similarity(code1: str, code2: str, language: str = 'python',
                            config_path: str = None) -> Dict[str, Any]:
-    """Calculate AST similarity between two codes"""
     analyzer = Phase2ASTSimilarity(config_path)
     return analyzer.analyze_code_pair(code1, code2, language)
 
@@ -17,26 +12,17 @@ def calculate_ast_similarity(code1: str, code2: str, language: str = 'python',
 def analyze_code_pair(code1: str, code2: str, language: str = 'python',
                      phase1_results: Optional[Dict] = None,
                      config_path: str = None) -> Dict[str, Any]:
-    """Complete analysis of a code pair"""
     analyzer = Phase2ASTSimilarity(config_path)
     return analyzer.analyze_code_pair(code1, code2, language, phase1_results)
 
 
-def integrate_with_phase1(phase1_results: Dict, code1: str, code2: str,
-                         language: str = 'python', config_path: str = None) -> Dict[str, Any]:
-    """
-    Combine Phase 1 and Phase 2 results
-    """
+def integrate_with_phase1(phase1_results: Dict, code1: str, code2: str, language: str = 'python', config_path: str = None) -> Dict[str, Any]:
+
     analyzer = Phase2ASTSimilarity(config_path)
     return analyzer.analyze_code_pair(code1, code2, language, phase1_results)
 
 
-def run_phase1_and_phase2(code1: str, code2: str, language: str = 'python',
-                         phase1_config: str = None, phase2_config: str = None) -> Dict[str, Any]:
-    """
-    Automatically run both phases
-    This function attempts to run Phase 1 and then combine results with Phase 2.
-    """
+def run_phase1_and_phase2(code1: str, code2: str, language: str = 'python', phase1_config: str = None, phase2_config: str = None) -> Dict[str, Any]:
     phase1_results = None
 
     try:
@@ -72,7 +58,6 @@ def run_phase1_and_phase2(code1: str, code2: str, language: str = 'python',
 
 
 def save_results(results: Dict[str, Any], output_file: str = 'phase2_results.json'):
-    """Save results to file"""
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
 
@@ -84,7 +69,6 @@ def save_results(results: Dict[str, Any], output_file: str = 'phase2_results.jso
 
 
 def generate_text_report(results: Dict[str, Any]) -> str:
-    """Generate text report from results"""
     lines = []
     lines.append("=" * 70)
     lines.append("Phase 2 Analysis Report - Structural Similarity (AST)")

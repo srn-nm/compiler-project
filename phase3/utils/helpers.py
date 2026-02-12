@@ -1,8 +1,3 @@
-"""
-Utility functions for Phase 3
-Lightweight and focused on CFG analysis
-"""
-
 import json
 import hashlib
 from typing import Dict, List, Any, Optional, Tuple

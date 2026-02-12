@@ -1,15 +1,9 @@
-"""
-Control Flow Graph (CFG) Builder from AST
-Complete implementation with proper AST traversal
-"""
-
 from typing import Dict, List, Set, Any, Optional, Tuple
 from enum import Enum
 import networkx as nx
 
 
 class NodeType(Enum):
-    """Types of CFG nodes"""
     ENTRY = "entry"
     EXIT = "exit"
     BASIC_BLOCK = "basic_block"

@@ -1,7 +1,3 @@
-"""
-AST Analysis Module for Phase 2 - Integrated with Phase 1
-"""
-
 import ast
 import hashlib
 import json
@@ -10,7 +6,6 @@ from pathlib import Path
 
 
 class ASTNode:
-    """Class representing an AST node"""
 
     def __init__(self, node_type: str, value: str = None, children: List['ASTNode'] = None,
                  line: int = None, col: int = None):
@@ -22,22 +17,18 @@ class ASTNode:
         self.hash = self.calculate_hash()
 
     def calculate_hash(self) -> str:
-        """Calculate hash for node (structure only, not exact values)"""
-        # For resistance to variable renaming, use node type and child structure
         content = f"{self.node_type}:"
         for child in self.children:
             content += child.hash
         return hashlib.md5(content.encode()).hexdigest()
 
     def structural_hash(self) -> str:
-        """Calculate structural hash (even without node type)"""
         content = ""
         for child in self.children:
             content += child.structural_hash()
         return hashlib.md5(content.encode()).hexdigest() if content else "leaf"
 
     def to_dict(self) -> Dict:
-        """Convert node to dictionary"""
         return {
             'type': self.node_type,
             'value': self.value,
@@ -50,14 +41,12 @@ class ASTNode:
 
 
 class ASTSimilarityAnalyzer:
-    """AST-based similarity analyzer with Phase 1 integration"""
 
     def __init__(self, language: str = 'python', config_path: str = None):
         self.language = language
         self.config = self.load_config(config_path)
 
     def load_config(self, config_path: Optional[str] = None) -> Dict:
-        """Load configuration"""
         default_config = {
             'normalize_identifiers': True,
             'normalize_literals': True,
@@ -90,36 +79,25 @@ class ASTSimilarityAnalyzer:
         return default_config
 
     def parse_code(self, code: str) -> ASTNode:
-        """Convert code to AST"""
         if self.language == 'python':
             return self.parse_python_ast(code)
-        elif self.language == 'java':
-            # TODO: Add Java support with ANTLR
-            raise NotImplementedError("Java parser not yet implemented")
-        elif self.language == 'cpp':
-            # TODO: Add C++ support with ANTLR
-            raise NotImplementedError("C++ parser not yet implemented")
         else:
             raise ValueError(f"Language {self.language} not supported")
 
     def parse_python_ast(self, code: str) -> ASTNode:
-        """Convert Python code to AST using standard ast module"""
         try:
             tree = ast.parse(code)
             return self.convert_ast_node(tree)
         except SyntaxError as e:
             print(f" Syntax error in code parsing: {e}")
-            # Return empty tree
             return ASTNode('Module', children=[])
 
     def convert_ast_node(self, node, parent_type: str = None) -> ASTNode:
-        """Convert Python ast node to custom ASTNode"""
         if node is None:
             return ASTNode('None')
 
         node_type = type(node).__name__
 
-        # Normalize variable and function names if configured
         value = None
         if isinstance(node, ast.Name):
             value = 'VAR' if self.config.get('normalize_identifiers') else node.id
@@ -129,7 +107,7 @@ class ASTSimilarityAnalyzer:
             value = 'CLASS' if self.config.get('normalize_identifiers') else node.name
         elif isinstance(node, ast.Constant):
             if self.config.get('normalize_literals'):
-                value = type(node.value).__name__.upper()  # e.g., 'STR', 'INT'
+                value = type(node.value).__name__.upper()  
             else:
                 value = repr(node.value)
         elif hasattr(node, 'name'):
@@ -171,12 +149,7 @@ class ASTSimilarityAnalyzer:
         return ast_node
 
     def analyze_with_phase1(self, code1: str, code2: str, phase1_results: Dict = None) -> Dict[str, Any]:
-        """
-        Complete analysis with Phase 1 integration
-        Parameters:
-            code1
-            code2
-        """
+        # Parameters: code1 code2
         # Build ASTs
         ast1 = self.parse_code(code1)
         ast2 = self.parse_code(code2)
@@ -189,7 +162,6 @@ class ASTSimilarityAnalyzer:
             return ast_similarity
 
     def calculate_ast_similarity(self, ast1: ASTNode, ast2: ASTNode) -> Dict[str, Any]:
-        """Calculate similarity between two ASTs"""
         metrics = {}
 
         structural_sim = self.structural_similarity(ast1, ast2)
@@ -235,7 +207,6 @@ class ASTSimilarityAnalyzer:
         }
 
     def structural_similarity(self, ast1: ASTNode, ast2: ASTNode) -> float:
-        """Structural similarity based on hash"""
 
         def collect_structural_hashes(node: ASTNode, hashes: List[str]):
             hashes.append(node.structural_hash())
@@ -259,7 +230,6 @@ class ASTSimilarityAnalyzer:
         return intersection / union if union > 0 else 0.0
 
     def node_type_distribution_similarity(self, ast1: ASTNode, ast2: ASTNode) -> float:
-        """Similarity of node type distribution"""
         from collections import Counter
 
         def count_node_types(node: ASTNode, counter: Counter):
@@ -290,10 +260,8 @@ class ASTSimilarityAnalyzer:
         return dot_product / (norm1 * norm2)
 
     def subtree_matching_similarity(self, ast1: ASTNode, ast2: ASTNode) -> float:
-        """Similarity based on subtree matching"""
 
         def collect_subtree_hashes(node: ASTNode, hashes: List[str], depth: int = 0, max_depth: int = 3):
-            """Collect subtree hashes up to specified depth"""
             if depth > max_depth:
                 return
 
@@ -312,7 +280,6 @@ class ASTSimilarityAnalyzer:
         return common / total if total > 0 else 0.0
 
     def tree_depth_similarity(self, ast1: ASTNode, ast2: ASTNode) -> float:
-        """Tree depth similarity"""
 
         def max_depth(node: ASTNode) -> int:
             if not node.children:
@@ -328,7 +295,6 @@ class ASTSimilarityAnalyzer:
         return 1 - abs(depth1 - depth2) / max(depth1, depth2)
 
     def get_tree_statistics(self, node: ASTNode) -> Dict[str, Any]:
-        """Collect tree statistics"""
         stats = {
             'total_nodes': 0,
             'node_types': {},
@@ -359,7 +325,6 @@ class ASTSimilarityAnalyzer:
         return stats
 
     def find_similar_nodes(self, ast1: ASTNode, ast2: ASTNode, threshold: float = 0.8) -> List[Dict]:
-        """Find similar nodes between two ASTs"""
         similar_nodes = []
 
         def compare_nodes(node1: ASTNode, node2: ASTNode, path1: str = "", path2: str = ""):
@@ -399,7 +364,6 @@ class ASTSimilarityAnalyzer:
 
     def integrate_results(self, phase1_results: Dict, ast_results: Dict,
                           code1: str, code2: str) -> Dict[str, Any]:
-        """Combine Phase 1 and Phase 2 results"""
         token_score = phase1_results.get('overall_similarity', 0) / 100  # Convert to 0-1
         ast_score = ast_results.get('ast_similarity_score', 0) / 100  # Convert to 0-1
 
@@ -444,7 +408,6 @@ class ASTSimilarityAnalyzer:
 
 
 class Phase2ASTSimilarity:
-    """Main class for external use - simplified interface"""
 
     def __init__(self, config_path: str = None):
         self.config_path = config_path
@@ -452,7 +415,6 @@ class Phase2ASTSimilarity:
 
     def analyze_code_pair(self, code1: str, code2: str, language: str = 'python',
                           phase1_results: Dict = None) -> Dict[str, Any]:
-        """Analyze two codes - main entry point"""
         self.analyzer = ASTSimilarityAnalyzer(language, self.config_path)
 
         if phase1_results:
@@ -463,7 +425,6 @@ class Phase2ASTSimilarity:
             return self.analyzer.calculate_ast_similarity(ast1, ast2)
 
     def analyze_files(self, file1: str, file2: str, language: str = 'auto') -> Dict[str, Any]:
-        """Analyze two files"""
         if language == 'auto':
             lang = self.detect_language_from_file(file1)
         else:
@@ -478,30 +439,20 @@ class Phase2ASTSimilarity:
         return self.analyze_code_pair(code1, code2, lang)
 
     def detect_language_from_file(self, filename: str) -> str:
-        """Detect language from file extension"""
         ext = Path(filename).suffix.lower()
 
         extensions_map = {
             '.py': 'python',
             '.java': 'java',
             '.cpp': 'cpp', '.cc': 'cpp', '.cxx': 'cpp', '.hpp': 'cpp', '.h': 'cpp',
-            '.c': 'c',
-            '.js': 'javascript',
-            '.go': 'go',
-            '.rs': 'rust',
-            '.php': 'php',
-            '.rb': 'ruby',
-            '.cs': 'csharp',
         }
 
         return extensions_map.get(ext, 'python')  # Default to Python
 
     def analyze_code_pair(self, code1: str, code2: str, language: str = 'python',
                           phase1_results: Dict = None) -> Dict[str, Any]:
-        """Analyze two codes - main entry point"""
         self.analyzer = ASTSimilarityAnalyzer(language, self.config_path)
 
-        # ساخت AST
         ast1 = self.analyzer.parse_code(code1)
         ast2 = self.analyzer.parse_code(code2)
 
@@ -510,7 +461,6 @@ class Phase2ASTSimilarity:
         else:
             results = self.analyzer.calculate_ast_similarity(ast1, ast2)
 
-        # افزودن AST به نتایج برای فازهای بعدی
         if hasattr(ast1, 'to_dict'):
             results['ast1_dict'] = ast1.to_dict()
         if hasattr(ast2, 'to_dict'):
