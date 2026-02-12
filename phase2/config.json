@@ -1,0 +1,31 @@
+{
+  "normalize_identifiers": true,
+  "normalize_literals": true,
+  "ignore_comments": true,
+  "ignore_whitespace": true,
+
+  "ast_similarity_weights": {
+    "structural": 0.4,
+    "node_types": 0.3,
+    "subtree_matching": 0.3
+  },
+
+  "integration_weights": {
+    "token": 0.3,
+    "ast": 0.7
+  },
+
+  "plagiarism_threshold": 0.65,
+
+  "matching": {
+    "min_subtree_size": 3,
+    "similarity_threshold": 0.7,
+    "max_depth_for_comparison": 5
+  },
+
+  "output": {
+    "generate_json": true,
+    "generate_text_report": true,
+    "verbose": false
+  }
+}
