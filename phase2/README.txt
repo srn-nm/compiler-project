@@ -1,8 +1,7 @@
 # Phase 2: AST-Based Plagiarism Detection System
 
-## Overview
-Phase 2 of the Plagiarism Detection System performs **structural similarity analysis** using Abstract Syntax Trees (AST). This phase goes beyond token-based matching to understand the **actual structure and logic** of the code, making it more resilient against simple obfuscation techniques.
-
 ### Installation
-No external dependencies required! Uses only Python standard libraries.
-```bash
+
+### How to Run
+
+python -m phase2.src.main --phase1-results phase1/results/similarity_report_Phase1.json -f1 phase1/tests/test_python/code1.py -f2 phase1/tests/test_python/code2.py

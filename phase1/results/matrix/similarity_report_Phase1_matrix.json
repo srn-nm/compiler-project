@@ -1,0 +1,4191 @@
+{
+  "similarity_matrix": [
+    [
+      1.0,
+      0.8753660050175269
+    ],
+    [
+      0.8753660050175269,
+      1.0
+    ]
+  ],
+  "comparisons": [
+    {
+      "file1": 0,
+      "file2": 1,
+      "similarity": 0.8753660050175269,
+      "details": {
+        "overall_similarity": 87.53660050175269,
+        "metrics": {
+          "jaccard_similarity": 0.9411764705882353,
+          "cosine_similarity": 0.9977617712239917,
+          "levenshtein_similarity": 0.7612687813021703,
+          "sequence_similarity": 0.7662771285475793,
+          "normalized_jaccard": 0.9411764705882353
+        },
+        "token_counts": {
+          "code1": 472,
+          "code2": 599,
+          "common_types": 32,
+          "unique_types1": 33,
+          "unique_types2": 33
+        },
+        "matched_sections": [
+          {
+            "start1": 37,
+            "end1": 49,
+            "start2": 37,
+            "end2": 49,
+            "length": 13,
+            "tokens": [
+              {
+                "type": "EQUALS",
+                "text": "==",
+                "line": 9,
+                "column": 11,
+                "index": 37
+              },
+              {
+                "type": "NUMBER",
+                "text": "2",
+                "line": 9,
+                "column": 14,
+                "index": 38
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 9,
+                "column": 15,
+                "index": 39
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 10,
+                "column": 8,
+                "index": 40
+              },
+              {
+                "type": "INDENT",
+                "text": "        ",
+                "line": 10,
+                "column": 8,
+                "index": 41
+              },
+              {
+                "type": "RETURN",
+                "text": "return",
+                "line": 10,
+                "column": 8,
+                "index": 42
+              },
+              {
+                "type": "OPEN_BRACK",
+                "text": "[",
+                "line": 10,
+                "column": 15,
+                "index": 43
+              },
+              {
+                "type": "NUMBER",
+                "text": "0",
+                "line": 10,
+                "column": 16,
+                "index": 44
+              },
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 10,
+                "column": 17,
+                "index": 45
+              },
+              {
+                "type": "NUMBER",
+                "text": "1",
+                "line": 10,
+                "column": 19,
+                "index": 46
+              },
+              {
+                "type": "CLOSE_BRACK",
+                "text": "]",
+                "line": 10,
+                "column": 20,
+                "index": 47
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 12,
+                "column": 4,
+                "index": 48
+              },
+              {
+                "type": "DEDENT",
+                "text": " ",
+                "line": 12,
+                "column": 4,
+                "index": 49
+              }
+            ],
+            "token_texts": [
+              "==",
+              "2",
+              ":",
+              " ",
+              "        ",
+              "return",
+              "[",
+              "0",
+              ",",
+              "1",
+              "]",
+              " ",
+              " "
+            ],
+            "token_types": [
+              "EQUALS",
+              "NUMBER",
+              "COLON",
+              "NEWLINE",
+              "INDENT",
+              "RETURN",
+              "OPEN_BRACK",
+              "NUMBER",
+              "COMMA",
+              "NUMBER",
+              "CLOSE_BRACK",
+              "NEWLINE",
+              "DEDENT"
+            ],
+            "line_numbers": {
+              "start1": 9,
+              "end1": 12,
+              "start2": 9,
+              "end2": 12
+            }
+          },
+          {
+            "start1": 24,
+            "end1": 34,
+            "start2": 24,
+            "end2": 34,
+            "length": 11,
+            "tokens": [
+              {
+                "type": "EQUALS",
+                "text": "==",
+                "line": 7,
+                "column": 11,
+                "index": 24
+              },
+              {
+                "type": "NUMBER",
+                "text": "1",
+                "line": 7,
+                "column": 14,
+                "index": 25
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 7,
+                "column": 15,
+                "index": 26
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 8,
+                "column": 8,
+                "index": 27
+              },
+              {
+                "type": "INDENT",
+                "text": "        ",
+                "line": 8,
+                "column": 8,
+                "index": 28
+              },
+              {
+                "type": "RETURN",
+                "text": "return",
+                "line": 8,
+                "column": 8,
+                "index": 29
+              },
+              {
+                "type": "OPEN_BRACK",
+                "text": "[",
+                "line": 8,
+                "column": 15,
+                "index": 30
+              },
+              {
+                "type": "NUMBER",
+                "text": "0",
+                "line": 8,
+                "column": 16,
+                "index": 31
+              },
+              {
+                "type": "CLOSE_BRACK",
+                "text": "]",
+                "line": 8,
+                "column": 17,
+                "index": 32
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 9,
+                "column": 4,
+                "index": 33
+              },
+              {
+                "type": "DEDENT",
+                "text": " ",
+                "line": 9,
+                "column": 4,
+                "index": 34
+              }
+            ],
+            "token_texts": [
+              "==",
+              "1",
+              ":",
+              " ",
+              "        ",
+              "return",
+              "[",
+              "0",
+              "]",
+              " ",
+              " "
+            ],
+            "token_types": [
+              "EQUALS",
+              "NUMBER",
+              "COLON",
+              "NEWLINE",
+              "INDENT",
+              "RETURN",
+              "OPEN_BRACK",
+              "NUMBER",
+              "CLOSE_BRACK",
+              "NEWLINE",
+              "DEDENT"
+            ],
+            "line_numbers": {
+              "start1": 7,
+              "end1": 9,
+              "start2": 7,
+              "end2": 9
+            }
+          },
+          {
+            "start1": 375,
+            "end1": 385,
+            "start2": 474,
+            "end2": 484,
+            "length": 11,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 56,
+                "column": 41,
+                "index": 375
+              },
+              {
+                "type": "NEWLINE",
+                "text": "\n",
+                "line": 59,
+                "column": 0,
+                "index": 376
+              },
+              {
+                "type": "DEDENT",
+                "text": "\n",
+                "line": 59,
+                "column": 0,
+                "index": 377
+              },
+              {
+                "type": "DEDENT",
+                "text": "\n",
+                "line": 59,
+                "column": 0,
+                "index": 378
+              },
+              {
+                "type": "IF",
+                "text": "if",
+                "line": 59,
+                "column": 0,
+                "index": 379
+              },
+              {
+                "type": "NAME",
+                "text": "__name__",
+                "line": 59,
+                "column": 3,
+                "index": 380
+              },
+              {
+                "type": "EQUALS",
+                "text": "==",
+                "line": 59,
+                "column": 12,
+                "index": 381
+              },
+              {
+                "type": "STRING",
+                "text": "\"__main__\"",
+                "line": 59,
+                "column": 15,
+                "index": 382
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 59,
+                "column": 25,
+                "index": 383
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 61,
+                "column": 4,
+                "index": 384
+              },
+              {
+                "type": "INDENT",
+                "text": "    ",
+                "line": 61,
+                "column": 4,
+                "index": 385
+              }
+            ],
+            "token_texts": [
+              ")",
+              "\n",
+              "\n",
+              "\n",
+              "if",
+              "__name__",
+              "==",
+              "\"__main__\"",
+              ":",
+              " ",
+              "    "
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "NEWLINE",
+              "DEDENT",
+              "DEDENT",
+              "IF",
+              "NAME",
+              "EQUALS",
+              "STRING",
+              "COLON",
+              "NEWLINE",
+              "INDENT"
+            ],
+            "line_numbers": {
+              "start1": 56,
+              "end1": 61,
+              "start2": 74,
+              "end2": 79
+            }
+          },
+          {
+            "start1": 12,
+            "end1": 21,
+            "start2": 12,
+            "end2": 21,
+            "length": 10,
+            "tokens": [
+              {
+                "type": "LT_EQ",
+                "text": "<=",
+                "line": 5,
+                "column": 9,
+                "index": 12
+              },
+              {
+                "type": "NUMBER",
+                "text": "0",
+                "line": 5,
+                "column": 12,
+                "index": 13
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 5,
+                "column": 13,
+                "index": 14
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 6,
+                "column": 8,
+                "index": 15
+              },
+              {
+                "type": "INDENT",
+                "text": "        ",
+                "line": 6,
+                "column": 8,
+                "index": 16
+              },
+              {
+                "type": "RETURN",
+                "text": "return",
+                "line": 6,
+                "column": 8,
+                "index": 17
+              },
+              {
+                "type": "OPEN_BRACK",
+                "text": "[",
+                "line": 6,
+                "column": 15,
+                "index": 18
+              },
+              {
+                "type": "CLOSE_BRACK",
+                "text": "]",
+                "line": 6,
+                "column": 16,
+                "index": 19
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 7,
+                "column": 4,
+                "index": 20
+              },
+              {
+                "type": "DEDENT",
+                "text": " ",
+                "line": 7,
+                "column": 4,
+                "index": 21
+              }
+            ],
+            "token_texts": [
+              "<=",
+              "0",
+              ":",
+              " ",
+              "        ",
+              "return",
+              "[",
+              "]",
+              " ",
+              " "
+            ],
+            "token_types": [
+              "LT_EQ",
+              "NUMBER",
+              "COLON",
+              "NEWLINE",
+              "INDENT",
+              "RETURN",
+              "OPEN_BRACK",
+              "CLOSE_BRACK",
+              "NEWLINE",
+              "DEDENT"
+            ],
+            "line_numbers": {
+              "start1": 5,
+              "end1": 7,
+              "start2": 5,
+              "end2": 7
+            }
+          },
+          {
+            "start1": 139,
+            "end1": 148,
+            "start2": 139,
+            "end2": 148,
+            "length": 10,
+            "tokens": [
+              {
+                "type": "POWER",
+                "text": "**",
+                "line": 24,
+                "column": 33,
+                "index": 139
+              },
+              {
+                "type": "NUMBER",
+                "text": "0.5",
+                "line": 24,
+                "column": 35,
+                "index": 140
+              },
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 24,
+                "column": 38,
+                "index": 141
+              },
+              {
+                "type": "ADD",
+                "text": "+",
+                "line": 24,
+                "column": 40,
+                "index": 142
+              },
+              {
+                "type": "NUMBER",
+                "text": "1",
+                "line": 24,
+                "column": 42,
+                "index": 143
+              },
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 24,
+                "column": 43,
+                "index": 144
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 24,
+                "column": 44,
+                "index": 145
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 25,
+                "column": 12,
+                "index": 146
+              },
+              {
+                "type": "INDENT",
+                "text": "            ",
+                "line": 25,
+                "column": 12,
+                "index": 147
+              },
+              {
+                "type": "IF",
+                "text": "if",
+                "line": 25,
+                "column": 12,
+                "index": 148
+              }
+            ],
+            "token_texts": [
+              "**",
+              "0.5",
+              ")",
+              "+",
+              "1",
+              ")",
+              ":",
+              " ",
+              "            ",
+              "if"
+            ],
+            "token_types": [
+              "POWER",
+              "NUMBER",
+              "CLOSE_PAREN",
+              "ADD",
+              "NUMBER",
+              "CLOSE_PAREN",
+              "COLON",
+              "NEWLINE",
+              "INDENT",
+              "IF"
+            ],
+            "line_numbers": {
+              "start1": 24,
+              "end1": 25,
+              "start2": 24,
+              "end2": 25
+            }
+          },
+          {
+            "start1": 218,
+            "end1": 226,
+            "start2": 226,
+            "end2": 234,
+            "length": 9,
+            "tokens": [
+              {
+                "type": "MINUS",
+                "text": "-",
+                "line": 36,
+                "column": 27,
+                "index": 218
+              },
+              {
+                "type": "NAME",
+                "text": "i",
+                "line": 36,
+                "column": 28,
+                "index": 219
+              },
+              {
+                "type": "MINUS",
+                "text": "-",
+                "line": 36,
+                "column": 29,
+                "index": 220
+              },
+              {
+                "type": "NUMBER",
+                "text": "1",
+                "line": 36,
+                "column": 30,
+                "index": 221
+              },
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 36,
+                "column": 31,
+                "index": 222
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 36,
+                "column": 32,
+                "index": 223
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 37,
+                "column": 12,
+                "index": 224
+              },
+              {
+                "type": "INDENT",
+                "text": "            ",
+                "line": 37,
+                "column": 12,
+                "index": 225
+              },
+              {
+                "type": "IF",
+                "text": "if",
+                "line": 37,
+                "column": 12,
+                "index": 226
+              }
+            ],
+            "token_texts": [
+              "-",
+              "i",
+              "-",
+              "1",
+              ")",
+              ":",
+              " ",
+              "            ",
+              "if"
+            ],
+            "token_types": [
+              "MINUS",
+              "NAME",
+              "MINUS",
+              "NUMBER",
+              "CLOSE_PAREN",
+              "COLON",
+              "NEWLINE",
+              "INDENT",
+              "IF"
+            ],
+            "line_numbers": {
+              "start1": 36,
+              "end1": 37,
+              "start2": 38,
+              "end2": 39
+            }
+          },
+          {
+            "start1": 51,
+            "end1": 58,
+            "start2": 51,
+            "end2": 58,
+            "length": 8,
+            "tokens": [
+              {
+                "type": "ASSIGN",
+                "text": "=",
+                "line": 12,
+                "column": 17,
+                "index": 51
+              },
+              {
+                "type": "OPEN_BRACK",
+                "text": "[",
+                "line": 12,
+                "column": 19,
+                "index": 52
+              },
+              {
+                "type": "NUMBER",
+                "text": "0",
+                "line": 12,
+                "column": 20,
+                "index": 53
+              },
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 12,
+                "column": 21,
+                "index": 54
+              },
+              {
+                "type": "NUMBER",
+                "text": "1",
+                "line": 12,
+                "column": 23,
+                "index": 55
+              },
+              {
+                "type": "CLOSE_BRACK",
+                "text": "]",
+                "line": 12,
+                "column": 24,
+                "index": 56
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 13,
+                "column": 4,
+                "index": 57
+              },
+              {
+                "type": "FOR",
+                "text": "for",
+                "line": 13,
+                "column": 4,
+                "index": 58
+              }
+            ],
+            "token_texts": [
+              "=",
+              "[",
+              "0",
+              ",",
+              "1",
+              "]",
+              " ",
+              "for"
+            ],
+            "token_types": [
+              "ASSIGN",
+              "OPEN_BRACK",
+              "NUMBER",
+              "COMMA",
+              "NUMBER",
+              "CLOSE_BRACK",
+              "NEWLINE",
+              "FOR"
+            ],
+            "line_numbers": {
+              "start1": 12,
+              "end1": 13,
+              "start2": 12,
+              "end2": 13
+            }
+          },
+          {
+            "start1": 158,
+            "end1": 165,
+            "start2": 158,
+            "end2": 165,
+            "length": 8,
+            "tokens": [
+              {
+                "type": "ASSIGN",
+                "text": "=",
+                "line": 26,
+                "column": 25,
+                "index": 158
+              },
+              {
+                "type": "FALSE",
+                "text": "False",
+                "line": 26,
+                "column": 27,
+                "index": 159
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 27,
+                "column": 16,
+                "index": 160
+              },
+              {
+                "type": "BREAK",
+                "text": "break",
+                "line": 27,
+                "column": 16,
+                "index": 161
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 28,
+                "column": 8,
+                "index": 162
+              },
+              {
+                "type": "DEDENT",
+                "text": " ",
+                "line": 28,
+                "column": 8,
+                "index": 163
+              },
+              {
+                "type": "DEDENT",
+                "text": " ",
+                "line": 28,
+                "column": 8,
+                "index": 164
+              },
+              {
+                "type": "IF",
+                "text": "if",
+                "line": 28,
+                "column": 8,
+                "index": 165
+              }
+            ],
+            "token_texts": [
+              "=",
+              "False",
+              " ",
+              "break",
+              " ",
+              " ",
+              " ",
+              "if"
+            ],
+            "token_types": [
+              "ASSIGN",
+              "FALSE",
+              "NEWLINE",
+              "BREAK",
+              "NEWLINE",
+              "DEDENT",
+              "DEDENT",
+              "IF"
+            ],
+            "line_numbers": {
+              "start1": 26,
+              "end1": 28,
+              "start2": 26,
+              "end2": 28
+            }
+          },
+          {
+            "start1": 233,
+            "end1": 240,
+            "start2": 241,
+            "end2": 248,
+            "length": 8,
+            "tokens": [
+              {
+                "type": "OPEN_BRACK",
+                "text": "[",
+                "line": 37,
+                "column": 35,
+                "index": 233
+              },
+              {
+                "type": "NAME",
+                "text": "j",
+                "line": 37,
+                "column": 36,
+                "index": 234
+              },
+              {
+                "type": "ADD",
+                "text": "+",
+                "line": 37,
+                "column": 37,
+                "index": 235
+              },
+              {
+                "type": "NUMBER",
+                "text": "1",
+                "line": 37,
+                "column": 38,
+                "index": 236
+              },
+              {
+                "type": "CLOSE_BRACK",
+                "text": "]",
+                "line": 37,
+                "column": 39,
+                "index": 237
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 37,
+                "column": 40,
+                "index": 238
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 38,
+                "column": 16,
+                "index": 239
+              },
+              {
+                "type": "INDENT",
+                "text": "                ",
+                "line": 38,
+                "column": 16,
+                "index": 240
+              }
+            ],
+            "token_texts": [
+              "[",
+              "j",
+              "+",
+              "1",
+              "]",
+              ":",
+              " ",
+              "                "
+            ],
+            "token_types": [
+              "OPEN_BRACK",
+              "NAME",
+              "ADD",
+              "NUMBER",
+              "CLOSE_BRACK",
+              "COLON",
+              "NEWLINE",
+              "INDENT"
+            ],
+            "line_numbers": {
+              "start1": 37,
+              "end1": 38,
+              "start2": 39,
+              "end2": 40
+            }
+          },
+          {
+            "start1": 274,
+            "end1": 281,
+            "start2": 295,
+            "end2": 302,
+            "length": 8,
+            "tokens": [
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 41,
+                "column": 13,
+                "index": 274
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 42,
+                "column": 4,
+                "index": 275
+              },
+              {
+                "type": "INDENT",
+                "text": "    ",
+                "line": 42,
+                "column": 4,
+                "index": 276
+              },
+              {
+                "type": "DEF",
+                "text": "def",
+                "line": 42,
+                "column": 4,
+                "index": 277
+              },
+              {
+                "type": "NAME",
+                "text": "__init__",
+                "line": 42,
+                "column": 8,
+                "index": 278
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 42,
+                "column": 16,
+                "index": 279
+              },
+              {
+                "type": "NAME",
+                "text": "self",
+                "line": 42,
+                "column": 17,
+                "index": 280
+              },
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 42,
+                "column": 21,
+                "index": 281
+              }
+            ],
+            "token_texts": [
+              ":",
+              " ",
+              "    ",
+              "def",
+              "__init__",
+              "(",
+              "self",
+              ","
+            ],
+            "token_types": [
+              "COLON",
+              "NEWLINE",
+              "INDENT",
+              "DEF",
+              "NAME",
+              "OPEN_PAREN",
+              "NAME",
+              "COMMA"
+            ],
+            "line_numbers": {
+              "start1": 41,
+              "end1": 42,
+              "start2": 46,
+              "end2": 47
+            }
+          },
+          {
+            "start1": 433,
+            "end1": 440,
+            "start2": 532,
+            "end2": 539,
+            "length": 8,
+            "tokens": [
+              {
+                "type": "DOT",
+                "text": ".",
+                "line": 70,
+                "column": 46,
+                "index": 433
+              },
+              {
+                "type": "NAME",
+                "text": "copy",
+                "line": 70,
+                "column": 47,
+                "index": 434
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 70,
+                "column": 51,
+                "index": 435
+              },
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 70,
+                "column": 52,
+                "index": 436
+              },
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 70,
+                "column": 53,
+                "index": 437
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 71,
+                "column": 4,
+                "index": 438
+              },
+              {
+                "type": "NAME",
+                "text": "print",
+                "line": 71,
+                "column": 4,
+                "index": 439
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 71,
+                "column": 9,
+                "index": 440
+              }
+            ],
+            "token_texts": [
+              ".",
+              "copy",
+              "(",
+              ")",
+              ")",
+              " ",
+              "print",
+              "("
+            ],
+            "token_types": [
+              "DOT",
+              "NAME",
+              "OPEN_PAREN",
+              "CLOSE_PAREN",
+              "CLOSE_PAREN",
+              "NEWLINE",
+              "NAME",
+              "OPEN_PAREN"
+            ],
+            "line_numbers": {
+              "start1": 70,
+              "end1": 71,
+              "start2": 88,
+              "end2": 89
+            }
+          },
+          {
+            "start1": 210,
+            "end1": 216,
+            "start2": 218,
+            "end2": 224,
+            "length": 7,
+            "tokens": [
+              {
+                "type": "FOR",
+                "text": "for",
+                "line": 36,
+                "column": 8,
+                "index": 210
+              },
+              {
+                "type": "NAME",
+                "text": "j",
+                "line": 36,
+                "column": 12,
+                "index": 211
+              },
+              {
+                "type": "IN",
+                "text": "in",
+                "line": 36,
+                "column": 14,
+                "index": 212
+              },
+              {
+                "type": "NAME",
+                "text": "range",
+                "line": 36,
+                "column": 17,
+                "index": 213
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 36,
+                "column": 22,
+                "index": 214
+              },
+              {
+                "type": "NUMBER",
+                "text": "0",
+                "line": 36,
+                "column": 23,
+                "index": 215
+              },
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 36,
+                "column": 24,
+                "index": 216
+              }
+            ],
+            "token_texts": [
+              "for",
+              "j",
+              "in",
+              "range",
+              "(",
+              "0",
+              ","
+            ],
+            "token_types": [
+              "FOR",
+              "NAME",
+              "IN",
+              "NAME",
+              "OPEN_PAREN",
+              "NUMBER",
+              "COMMA"
+            ],
+            "line_numbers": {
+              "start1": 36,
+              "end1": 36,
+              "start2": 38,
+              "end2": 38
+            }
+          },
+          {
+            "start1": 119,
+            "end1": 124,
+            "start2": 119,
+            "end2": 124,
+            "length": 6,
+            "tokens": [
+              {
+                "type": "ADD",
+                "text": "+",
+                "line": 22,
+                "column": 30,
+                "index": 119
+              },
+              {
+                "type": "NUMBER",
+                "text": "1",
+                "line": 22,
+                "column": 32,
+                "index": 120
+              },
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 22,
+                "column": 33,
+                "index": 121
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 22,
+                "column": 34,
+                "index": 122
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 23,
+                "column": 8,
+                "index": 123
+              },
+              {
+                "type": "INDENT",
+                "text": "        ",
+                "line": 23,
+                "column": 8,
+                "index": 124
+              }
+            ],
+            "token_texts": [
+              "+",
+              "1",
+              ")",
+              ":",
+              " ",
+              "        "
+            ],
+            "token_types": [
+              "ADD",
+              "NUMBER",
+              "CLOSE_PAREN",
+              "COLON",
+              "NEWLINE",
+              "INDENT"
+            ],
+            "line_numbers": {
+              "start1": 22,
+              "end1": 23,
+              "start2": 22,
+              "end2": 23
+            }
+          },
+          {
+            "start1": 199,
+            "end1": 204,
+            "start2": 203,
+            "end2": 208,
+            "length": 6,
+            "tokens": [
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 35,
+                "column": 4,
+                "index": 199
+              },
+              {
+                "type": "FOR",
+                "text": "for",
+                "line": 35,
+                "column": 4,
+                "index": 200
+              },
+              {
+                "type": "NAME",
+                "text": "i",
+                "line": 35,
+                "column": 8,
+                "index": 201
+              },
+              {
+                "type": "IN",
+                "text": "in",
+                "line": 35,
+                "column": 10,
+                "index": 202
+              },
+              {
+                "type": "NAME",
+                "text": "range",
+                "line": 35,
+                "column": 13,
+                "index": 203
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 35,
+                "column": 18,
+                "index": 204
+              }
+            ],
+            "token_texts": [
+              " ",
+              "for",
+              "i",
+              "in",
+              "range",
+              "("
+            ],
+            "token_types": [
+              "NEWLINE",
+              "FOR",
+              "NAME",
+              "IN",
+              "NAME",
+              "OPEN_PAREN"
+            ],
+            "line_numbers": {
+              "start1": 35,
+              "end1": 35,
+              "start2": 36,
+              "end2": 36
+            }
+          },
+          {
+            "start1": 247,
+            "end1": 252,
+            "start2": 255,
+            "end2": 260,
+            "length": 6,
+            "tokens": [
+              {
+                "type": "OPEN_BRACK",
+                "text": "[",
+                "line": 38,
+                "column": 35,
+                "index": 247
+              },
+              {
+                "type": "NAME",
+                "text": "j",
+                "line": 38,
+                "column": 36,
+                "index": 248
+              },
+              {
+                "type": "ADD",
+                "text": "+",
+                "line": 38,
+                "column": 37,
+                "index": 249
+              },
+              {
+                "type": "NUMBER",
+                "text": "1",
+                "line": 38,
+                "column": 38,
+                "index": 250
+              },
+              {
+                "type": "CLOSE_BRACK",
+                "text": "]",
+                "line": 38,
+                "column": 39,
+                "index": 251
+              },
+              {
+                "type": "ASSIGN",
+                "text": "=",
+                "line": 38,
+                "column": 41,
+                "index": 252
+              }
+            ],
+            "token_texts": [
+              "[",
+              "j",
+              "+",
+              "1",
+              "]",
+              "="
+            ],
+            "token_types": [
+              "OPEN_BRACK",
+              "NAME",
+              "ADD",
+              "NUMBER",
+              "CLOSE_BRACK",
+              "ASSIGN"
+            ],
+            "line_numbers": {
+              "start1": 38,
+              "end1": 38,
+              "start2": 40,
+              "end2": 40
+            }
+          },
+          {
+            "start1": 254,
+            "end1": 259,
+            "start2": 262,
+            "end2": 267,
+            "length": 6,
+            "tokens": [
+              {
+                "type": "OPEN_BRACK",
+                "text": "[",
+                "line": 38,
+                "column": 50,
+                "index": 254
+              },
+              {
+                "type": "NAME",
+                "text": "j",
+                "line": 38,
+                "column": 51,
+                "index": 255
+              },
+              {
+                "type": "ADD",
+                "text": "+",
+                "line": 38,
+                "column": 52,
+                "index": 256
+              },
+              {
+                "type": "NUMBER",
+                "text": "1",
+                "line": 38,
+                "column": 53,
+                "index": 257
+              },
+              {
+                "type": "CLOSE_BRACK",
+                "text": "]",
+                "line": 38,
+                "column": 54,
+                "index": 258
+              },
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 38,
+                "column": 55,
+                "index": 259
+              }
+            ],
+            "token_texts": [
+              "[",
+              "j",
+              "+",
+              "1",
+              "]",
+              ","
+            ],
+            "token_types": [
+              "OPEN_BRACK",
+              "NAME",
+              "ADD",
+              "NUMBER",
+              "CLOSE_BRACK",
+              "COMMA"
+            ],
+            "line_numbers": {
+              "start1": 38,
+              "end1": 38,
+              "start2": 40,
+              "end2": 40
+            }
+          },
+          {
+            "start1": 287,
+            "end1": 292,
+            "start2": 306,
+            "end2": 311,
+            "length": 6,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 42,
+                "column": 40,
+                "index": 287
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 42,
+                "column": 41,
+                "index": 288
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 43,
+                "column": 8,
+                "index": 289
+              },
+              {
+                "type": "INDENT",
+                "text": "        ",
+                "line": 43,
+                "column": 8,
+                "index": 290
+              },
+              {
+                "type": "NAME",
+                "text": "self",
+                "line": 43,
+                "column": 8,
+                "index": 291
+              },
+              {
+                "type": "DOT",
+                "text": ".",
+                "line": 43,
+                "column": 12,
+                "index": 292
+              }
+            ],
+            "token_texts": [
+              ")",
+              ":",
+              " ",
+              "        ",
+              "self",
+              "."
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "COLON",
+              "NEWLINE",
+              "INDENT",
+              "NAME",
+              "DOT"
+            ],
+            "line_numbers": {
+              "start1": 42,
+              "end1": 43,
+              "start2": 47,
+              "end2": 48
+            }
+          },
+          {
+            "start1": 312,
+            "end1": 317,
+            "start2": 325,
+            "end2": 330,
+            "length": 6,
+            "tokens": [
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 47,
+                "column": 25,
+                "index": 312
+              },
+              {
+                "type": "NAME",
+                "text": "self",
+                "line": 47,
+                "column": 26,
+                "index": 313
+              },
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 47,
+                "column": 30,
+                "index": 314
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 47,
+                "column": 31,
+                "index": 315
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 48,
+                "column": 8,
+                "index": 316
+              },
+              {
+                "type": "INDENT",
+                "text": "        ",
+                "line": 48,
+                "column": 8,
+                "index": 317
+              }
+            ],
+            "token_texts": [
+              "(",
+              "self",
+              ")",
+              ":",
+              " ",
+              "        "
+            ],
+            "token_types": [
+              "OPEN_PAREN",
+              "NAME",
+              "CLOSE_PAREN",
+              "COLON",
+              "NEWLINE",
+              "INDENT"
+            ],
+            "line_numbers": {
+              "start1": 47,
+              "end1": 48,
+              "start2": 51,
+              "end2": 52
+            }
+          },
+          {
+            "start1": 348,
+            "end1": 353,
+            "start2": 339,
+            "end2": 344,
+            "length": 6,
+            "tokens": [
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 52,
+                "column": 20,
+                "index": 348
+              },
+              {
+                "type": "NAME",
+                "text": "self",
+                "line": 52,
+                "column": 21,
+                "index": 349
+              },
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 52,
+                "column": 25,
+                "index": 350
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 52,
+                "column": 26,
+                "index": 351
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 53,
+                "column": 8,
+                "index": 352
+              },
+              {
+                "type": "INDENT",
+                "text": "        ",
+                "line": 53,
+                "column": 8,
+                "index": 353
+              }
+            ],
+            "token_texts": [
+              "(",
+              "self",
+              ")",
+              ":",
+              " ",
+              "        "
+            ],
+            "token_types": [
+              "OPEN_PAREN",
+              "NAME",
+              "CLOSE_PAREN",
+              "COLON",
+              "NEWLINE",
+              "INDENT"
+            ],
+            "line_numbers": {
+              "start1": 52,
+              "end1": 53,
+              "start2": 54,
+              "end2": 55
+            }
+          },
+          {
+            "start1": 107,
+            "end1": 111,
+            "start2": 107,
+            "end2": 111,
+            "length": 5,
+            "tokens": [
+              {
+                "type": "ASSIGN",
+                "text": "=",
+                "line": 21,
+                "column": 11,
+                "index": 107
+              },
+              {
+                "type": "OPEN_BRACK",
+                "text": "[",
+                "line": 21,
+                "column": 13,
+                "index": 108
+              },
+              {
+                "type": "CLOSE_BRACK",
+                "text": "]",
+                "line": 21,
+                "column": 14,
+                "index": 109
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 22,
+                "column": 4,
+                "index": 110
+              },
+              {
+                "type": "FOR",
+                "text": "for",
+                "line": 22,
+                "column": 4,
+                "index": 111
+              }
+            ],
+            "token_texts": [
+              "=",
+              "[",
+              "]",
+              " ",
+              "for"
+            ],
+            "token_types": [
+              "ASSIGN",
+              "OPEN_BRACK",
+              "CLOSE_BRACK",
+              "NEWLINE",
+              "FOR"
+            ],
+            "line_numbers": {
+              "start1": 21,
+              "end1": 22,
+              "start2": 21,
+              "end2": 22
+            }
+          },
+          {
+            "start1": 113,
+            "end1": 117,
+            "start2": 60,
+            "end2": 64,
+            "length": 5,
+            "tokens": [
+              {
+                "type": "IN",
+                "text": "in",
+                "line": 22,
+                "column": 12,
+                "index": 113
+              },
+              {
+                "type": "NAME",
+                "text": "range",
+                "line": 22,
+                "column": 15,
+                "index": 114
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 22,
+                "column": 20,
+                "index": 115
+              },
+              {
+                "type": "NUMBER",
+                "text": "2",
+                "line": 22,
+                "column": 21,
+                "index": 116
+              },
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 22,
+                "column": 22,
+                "index": 117
+              }
+            ],
+            "token_texts": [
+              "in",
+              "range",
+              "(",
+              "2",
+              ","
+            ],
+            "token_types": [
+              "IN",
+              "NAME",
+              "OPEN_PAREN",
+              "NUMBER",
+              "COMMA"
+            ],
+            "line_numbers": {
+              "start1": 22,
+              "end1": 22,
+              "start2": 13,
+              "end2": 13
+            }
+          },
+          {
+            "start1": 131,
+            "end1": 135,
+            "start2": 113,
+            "end2": 117,
+            "length": 5,
+            "tokens": [
+              {
+                "type": "IN",
+                "text": "in",
+                "line": 24,
+                "column": 14,
+                "index": 131
+              },
+              {
+                "type": "NAME",
+                "text": "range",
+                "line": 24,
+                "column": 17,
+                "index": 132
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 24,
+                "column": 22,
+                "index": 133
+              },
+              {
+                "type": "NUMBER",
+                "text": "2",
+                "line": 24,
+                "column": 23,
+                "index": 134
+              },
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 24,
+                "column": 24,
+                "index": 135
+              }
+            ],
+            "token_texts": [
+              "in",
+              "range",
+              "(",
+              "2",
+              ","
+            ],
+            "token_types": [
+              "IN",
+              "NAME",
+              "OPEN_PAREN",
+              "NUMBER",
+              "COMMA"
+            ],
+            "line_numbers": {
+              "start1": 24,
+              "end1": 24,
+              "start2": 22,
+              "end2": 22
+            }
+          },
+          {
+            "start1": 152,
+            "end1": 156,
+            "start2": 152,
+            "end2": 156,
+            "length": 5,
+            "tokens": [
+              {
+                "type": "EQUALS",
+                "text": "==",
+                "line": 25,
+                "column": 23,
+                "index": 152
+              },
+              {
+                "type": "NUMBER",
+                "text": "0",
+                "line": 25,
+                "column": 26,
+                "index": 153
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 25,
+                "column": 27,
+                "index": 154
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 26,
+                "column": 16,
+                "index": 155
+              },
+              {
+                "type": "INDENT",
+                "text": "                ",
+                "line": 26,
+                "column": 16,
+                "index": 156
+              }
+            ],
+            "token_texts": [
+              "==",
+              "0",
+              ":",
+              " ",
+              "                "
+            ],
+            "token_types": [
+              "EQUALS",
+              "NUMBER",
+              "COLON",
+              "NEWLINE",
+              "INDENT"
+            ],
+            "line_numbers": {
+              "start1": 25,
+              "end1": 26,
+              "start2": 25,
+              "end2": 26
+            }
+          },
+          {
+            "start1": 175,
+            "end1": 179,
+            "start2": 175,
+            "end2": 179,
+            "length": 5,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 29,
+                "column": 29,
+                "index": 175
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 30,
+                "column": 4,
+                "index": 176
+              },
+              {
+                "type": "DEDENT",
+                "text": " ",
+                "line": 30,
+                "column": 4,
+                "index": 177
+              },
+              {
+                "type": "DEDENT",
+                "text": " ",
+                "line": 30,
+                "column": 4,
+                "index": 178
+              },
+              {
+                "type": "RETURN",
+                "text": "return",
+                "line": 30,
+                "column": 4,
+                "index": 179
+              }
+            ],
+            "token_texts": [
+              ")",
+              " ",
+              " ",
+              " ",
+              "return"
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "NEWLINE",
+              "DEDENT",
+              "DEDENT",
+              "RETURN"
+            ],
+            "line_numbers": {
+              "start1": 29,
+              "end1": 30,
+              "start2": 29,
+              "end2": 30
+            }
+          },
+          {
+            "start1": 337,
+            "end1": 341,
+            "start2": 436,
+            "end2": 440,
+            "length": 5,
+            "tokens": [
+              {
+                "type": "DIV",
+                "text": "/",
+                "line": 50,
+                "column": 32,
+                "index": 337
+              },
+              {
+                "type": "NAME",
+                "text": "len",
+                "line": 50,
+                "column": 34,
+                "index": 338
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 50,
+                "column": 37,
+                "index": 339
+              },
+              {
+                "type": "NAME",
+                "text": "self",
+                "line": 50,
+                "column": 38,
+                "index": 340
+              },
+              {
+                "type": "DOT",
+                "text": ".",
+                "line": 50,
+                "column": 42,
+                "index": 341
+              }
+            ],
+            "token_texts": [
+              "/",
+              "len",
+              "(",
+              "self",
+              "."
+            ],
+            "token_types": [
+              "DIV",
+              "NAME",
+              "OPEN_PAREN",
+              "NAME",
+              "DOT"
+            ],
+            "line_numbers": {
+              "start1": 50,
+              "end1": 50,
+              "start2": 68,
+              "end2": 68
+            }
+          },
+          {
+            "start1": 359,
+            "end1": 363,
+            "start2": 458,
+            "end2": 462,
+            "length": 5,
+            "tokens": [
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 53,
+                "column": 36,
+                "index": 359
+              },
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 53,
+                "column": 37,
+                "index": 360
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 54,
+                "column": 8,
+                "index": 361
+              },
+              {
+                "type": "NAME",
+                "text": "print",
+                "line": 54,
+                "column": 8,
+                "index": 362
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 54,
+                "column": 13,
+                "index": 363
+              }
+            ],
+            "token_texts": [
+              "(",
+              ")",
+              " ",
+              "print",
+              "("
+            ],
+            "token_types": [
+              "OPEN_PAREN",
+              "CLOSE_PAREN",
+              "NEWLINE",
+              "NAME",
+              "OPEN_PAREN"
+            ],
+            "line_numbers": {
+              "start1": 53,
+              "end1": 54,
+              "start2": 71,
+              "end2": 72
+            }
+          },
+          {
+            "start1": 4,
+            "end1": 7,
+            "start2": 4,
+            "end2": 7,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 1,
+                "column": 25,
+                "index": 4
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 1,
+                "column": 26,
+                "index": 5
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 2,
+                "column": 4,
+                "index": 6
+              },
+              {
+                "type": "INDENT",
+                "text": "    ",
+                "line": 2,
+                "column": 4,
+                "index": 7
+              }
+            ],
+            "token_texts": [
+              ")",
+              ":",
+              " ",
+              "    "
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "COLON",
+              "NEWLINE",
+              "INDENT"
+            ],
+            "line_numbers": {
+              "start1": 1,
+              "end1": 2,
+              "start2": 1,
+              "end2": 2
+            }
+          },
+          {
+            "start1": 59,
+            "end1": 62,
+            "start2": 205,
+            "end2": 208,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "NAME",
+                "text": "i",
+                "line": 13,
+                "column": 8,
+                "index": 59
+              },
+              {
+                "type": "IN",
+                "text": "in",
+                "line": 13,
+                "column": 10,
+                "index": 60
+              },
+              {
+                "type": "NAME",
+                "text": "range",
+                "line": 13,
+                "column": 13,
+                "index": 61
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 13,
+                "column": 18,
+                "index": 62
+              }
+            ],
+            "token_texts": [
+              "i",
+              "in",
+              "range",
+              "("
+            ],
+            "token_types": [
+              "NAME",
+              "IN",
+              "NAME",
+              "OPEN_PAREN"
+            ],
+            "line_numbers": {
+              "start1": 13,
+              "end1": 13,
+              "start2": 36,
+              "end2": 36
+            }
+          },
+          {
+            "start1": 66,
+            "end1": 69,
+            "start2": 66,
+            "end2": 69,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 13,
+                "column": 23,
+                "index": 66
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 13,
+                "column": 24,
+                "index": 67
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 14,
+                "column": 8,
+                "index": 68
+              },
+              {
+                "type": "INDENT",
+                "text": "        ",
+                "line": 14,
+                "column": 8,
+                "index": 69
+              }
+            ],
+            "token_texts": [
+              ")",
+              ":",
+              " ",
+              "        "
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "COLON",
+              "NEWLINE",
+              "INDENT"
+            ],
+            "line_numbers": {
+              "start1": 13,
+              "end1": 14,
+              "start2": 13,
+              "end2": 14
+            }
+          },
+          {
+            "start1": 82,
+            "end1": 85,
+            "start2": 82,
+            "end2": 85,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "MINUS",
+                "text": "-",
+                "line": 14,
+                "column": 54,
+                "index": 82
+              },
+              {
+                "type": "NUMBER",
+                "text": "2",
+                "line": 14,
+                "column": 55,
+                "index": 83
+              },
+              {
+                "type": "CLOSE_BRACK",
+                "text": "]",
+                "line": 14,
+                "column": 56,
+                "index": 84
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 15,
+                "column": 8,
+                "index": 85
+              }
+            ],
+            "token_texts": [
+              "-",
+              "2",
+              "]",
+              " "
+            ],
+            "token_types": [
+              "MINUS",
+              "NUMBER",
+              "CLOSE_BRACK",
+              "NEWLINE"
+            ],
+            "line_numbers": {
+              "start1": 14,
+              "end1": 15,
+              "start2": 14,
+              "end2": 15
+            }
+          },
+          {
+            "start1": 91,
+            "end1": 94,
+            "start2": 91,
+            "end2": 94,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 15,
+                "column": 37,
+                "index": 91
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 17,
+                "column": 4,
+                "index": 92
+              },
+              {
+                "type": "DEDENT",
+                "text": " ",
+                "line": 17,
+                "column": 4,
+                "index": 93
+              },
+              {
+                "type": "RETURN",
+                "text": "return",
+                "line": 17,
+                "column": 4,
+                "index": 94
+              }
+            ],
+            "token_texts": [
+              ")",
+              " ",
+              " ",
+              "return"
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "NEWLINE",
+              "DEDENT",
+              "RETURN"
+            ],
+            "line_numbers": {
+              "start1": 15,
+              "end1": 17,
+              "start2": 15,
+              "end2": 17
+            }
+          },
+          {
+            "start1": 102,
+            "end1": 105,
+            "start2": 102,
+            "end2": 105,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 19,
+                "column": 21,
+                "index": 102
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 19,
+                "column": 22,
+                "index": 103
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 21,
+                "column": 4,
+                "index": 104
+              },
+              {
+                "type": "INDENT",
+                "text": "    ",
+                "line": 21,
+                "column": 4,
+                "index": 105
+              }
+            ],
+            "token_texts": [
+              ")",
+              ":",
+              " ",
+              "    "
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "COLON",
+              "NEWLINE",
+              "INDENT"
+            ],
+            "line_numbers": {
+              "start1": 19,
+              "end1": 21,
+              "start2": 19,
+              "end2": 21
+            }
+          },
+          {
+            "start1": 126,
+            "end1": 129,
+            "start2": 126,
+            "end2": 129,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "ASSIGN",
+                "text": "=",
+                "line": 23,
+                "column": 17,
+                "index": 126
+              },
+              {
+                "type": "TRUE",
+                "text": "True",
+                "line": 23,
+                "column": 19,
+                "index": 127
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 24,
+                "column": 8,
+                "index": 128
+              },
+              {
+                "type": "FOR",
+                "text": "for",
+                "line": 24,
+                "column": 8,
+                "index": 129
+              }
+            ],
+            "token_texts": [
+              "=",
+              "True",
+              " ",
+              "for"
+            ],
+            "token_types": [
+              "ASSIGN",
+              "TRUE",
+              "NEWLINE",
+              "FOR"
+            ],
+            "line_numbers": {
+              "start1": 23,
+              "end1": 24,
+              "start2": 23,
+              "end2": 24
+            }
+          },
+          {
+            "start1": 187,
+            "end1": 190,
+            "start2": 187,
+            "end2": 190,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 32,
+                "column": 21,
+                "index": 187
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 32,
+                "column": 22,
+                "index": 188
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 33,
+                "column": 4,
+                "index": 189
+              },
+              {
+                "type": "INDENT",
+                "text": "    ",
+                "line": 33,
+                "column": 4,
+                "index": 190
+              }
+            ],
+            "token_texts": [
+              ")",
+              ":",
+              " ",
+              "    "
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "COLON",
+              "NEWLINE",
+              "INDENT"
+            ],
+            "line_numbers": {
+              "start1": 32,
+              "end1": 33,
+              "start2": 32,
+              "end2": 33
+            }
+          },
+          {
+            "start1": 206,
+            "end1": 209,
+            "start2": 210,
+            "end2": 213,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 35,
+                "column": 20,
+                "index": 206
+              },
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 35,
+                "column": 21,
+                "index": 207
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 36,
+                "column": 8,
+                "index": 208
+              },
+              {
+                "type": "INDENT",
+                "text": "        ",
+                "line": 36,
+                "column": 8,
+                "index": 209
+              }
+            ],
+            "token_texts": [
+              ")",
+              ":",
+              " ",
+              "        "
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "COLON",
+              "NEWLINE",
+              "INDENT"
+            ],
+            "line_numbers": {
+              "start1": 35,
+              "end1": 36,
+              "start2": 36,
+              "end2": 37
+            }
+          },
+          {
+            "start1": 228,
+            "end1": 231,
+            "start2": 236,
+            "end2": 239,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "OPEN_BRACK",
+                "text": "[",
+                "line": 37,
+                "column": 22,
+                "index": 228
+              },
+              {
+                "type": "NAME",
+                "text": "j",
+                "line": 37,
+                "column": 23,
+                "index": 229
+              },
+              {
+                "type": "CLOSE_BRACK",
+                "text": "]",
+                "line": 37,
+                "column": 24,
+                "index": 230
+              },
+              {
+                "type": "GREATER_THAN",
+                "text": ">",
+                "line": 37,
+                "column": 26,
+                "index": 231
+              }
+            ],
+            "token_texts": [
+              "[",
+              "j",
+              "]",
+              ">"
+            ],
+            "token_types": [
+              "OPEN_BRACK",
+              "NAME",
+              "CLOSE_BRACK",
+              "GREATER_THAN"
+            ],
+            "line_numbers": {
+              "start1": 37,
+              "end1": 37,
+              "start2": 39,
+              "end2": 39
+            }
+          },
+          {
+            "start1": 242,
+            "end1": 245,
+            "start2": 250,
+            "end2": 253,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "OPEN_BRACK",
+                "text": "[",
+                "line": 38,
+                "column": 23,
+                "index": 242
+              },
+              {
+                "type": "NAME",
+                "text": "j",
+                "line": 38,
+                "column": 24,
+                "index": 243
+              },
+              {
+                "type": "CLOSE_BRACK",
+                "text": "]",
+                "line": 38,
+                "column": 25,
+                "index": 244
+              },
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 38,
+                "column": 26,
+                "index": 245
+              }
+            ],
+            "token_texts": [
+              "[",
+              "j",
+              "]",
+              ","
+            ],
+            "token_types": [
+              "OPEN_BRACK",
+              "NAME",
+              "CLOSE_BRACK",
+              "COMMA"
+            ],
+            "line_numbers": {
+              "start1": 38,
+              "end1": 38,
+              "start2": 40,
+              "end2": 40
+            }
+          },
+          {
+            "start1": 261,
+            "end1": 264,
+            "start2": 269,
+            "end2": 272,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "OPEN_BRACK",
+                "text": "[",
+                "line": 38,
+                "column": 64,
+                "index": 261
+              },
+              {
+                "type": "NAME",
+                "text": "j",
+                "line": 38,
+                "column": 65,
+                "index": 262
+              },
+              {
+                "type": "CLOSE_BRACK",
+                "text": "]",
+                "line": 38,
+                "column": 66,
+                "index": 263
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 39,
+                "column": 4,
+                "index": 264
+              }
+            ],
+            "token_texts": [
+              "[",
+              "j",
+              "]",
+              " "
+            ],
+            "token_types": [
+              "OPEN_BRACK",
+              "NAME",
+              "CLOSE_BRACK",
+              "NEWLINE"
+            ],
+            "line_numbers": {
+              "start1": 38,
+              "end1": 39,
+              "start2": 40,
+              "end2": 41
+            }
+          },
+          {
+            "start1": 282,
+            "end1": 285,
+            "start2": 365,
+            "end2": 368,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "NAME",
+                "text": "name",
+                "line": 42,
+                "column": 23,
+                "index": 282
+              },
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 42,
+                "column": 27,
+                "index": 283
+              },
+              {
+                "type": "NAME",
+                "text": "age",
+                "line": 42,
+                "column": 29,
+                "index": 284
+              },
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 42,
+                "column": 32,
+                "index": 285
+              }
+            ],
+            "token_texts": [
+              "name",
+              ",",
+              "age",
+              ","
+            ],
+            "token_types": [
+              "NAME",
+              "COMMA",
+              "NAME",
+              "COMMA"
+            ],
+            "line_numbers": {
+              "start1": 42,
+              "end1": 42,
+              "start2": 58,
+              "end2": 58
+            }
+          },
+          {
+            "start1": 326,
+            "end1": 329,
+            "start2": 412,
+            "end2": 415,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "RETURN",
+                "text": "return",
+                "line": 49,
+                "column": 12,
+                "index": 326
+              },
+              {
+                "type": "NUMBER",
+                "text": "0.0",
+                "line": 49,
+                "column": 19,
+                "index": 327
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 50,
+                "column": 8,
+                "index": 328
+              },
+              {
+                "type": "DEDENT",
+                "text": " ",
+                "line": 50,
+                "column": 8,
+                "index": 329
+              }
+            ],
+            "token_texts": [
+              "return",
+              "0.0",
+              " ",
+              " "
+            ],
+            "token_types": [
+              "RETURN",
+              "NUMBER",
+              "NEWLINE",
+              "DEDENT"
+            ],
+            "line_numbers": {
+              "start1": 49,
+              "end1": 50,
+              "start2": 64,
+              "end2": 65
+            }
+          },
+          {
+            "start1": 365,
+            "end1": 368,
+            "start2": 464,
+            "end2": 467,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 54,
+                "column": 37,
+                "index": 365
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 55,
+                "column": 8,
+                "index": 366
+              },
+              {
+                "type": "NAME",
+                "text": "print",
+                "line": 55,
+                "column": 8,
+                "index": 367
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 55,
+                "column": 13,
+                "index": 368
+              }
+            ],
+            "token_texts": [
+              ")",
+              " ",
+              "print",
+              "("
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "NEWLINE",
+              "NAME",
+              "OPEN_PAREN"
+            ],
+            "line_numbers": {
+              "start1": 54,
+              "end1": 55,
+              "start2": 72,
+              "end2": 73
+            }
+          },
+          {
+            "start1": 370,
+            "end1": 373,
+            "start2": 469,
+            "end2": 472,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 55,
+                "column": 32,
+                "index": 370
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 56,
+                "column": 8,
+                "index": 371
+              },
+              {
+                "type": "NAME",
+                "text": "print",
+                "line": 56,
+                "column": 8,
+                "index": 372
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 56,
+                "column": 13,
+                "index": 373
+              }
+            ],
+            "token_texts": [
+              ")",
+              " ",
+              "print",
+              "("
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "NEWLINE",
+              "NAME",
+              "OPEN_PAREN"
+            ],
+            "line_numbers": {
+              "start1": 55,
+              "end1": 56,
+              "start2": 73,
+              "end2": 74
+            }
+          },
+          {
+            "start1": 391,
+            "end1": 394,
+            "start2": 490,
+            "end2": 493,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 61,
+                "column": 39,
+                "index": 391
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 62,
+                "column": 4,
+                "index": 392
+              },
+              {
+                "type": "NAME",
+                "text": "print",
+                "line": 62,
+                "column": 4,
+                "index": 393
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 62,
+                "column": 9,
+                "index": 394
+              }
+            ],
+            "token_texts": [
+              ")",
+              " ",
+              "print",
+              "("
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "NEWLINE",
+              "NAME",
+              "OPEN_PAREN"
+            ],
+            "line_numbers": {
+              "start1": 61,
+              "end1": 62,
+              "start2": 79,
+              "end2": 80
+            }
+          },
+          {
+            "start1": 403,
+            "end1": 406,
+            "start2": 502,
+            "end2": 505,
+            "length": 4,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 65,
+                "column": 33,
+                "index": 403
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 66,
+                "column": 4,
+                "index": 404
+              },
+              {
+                "type": "NAME",
+                "text": "print",
+                "line": 66,
+                "column": 4,
+                "index": 405
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 66,
+                "column": 9,
+                "index": 406
+              }
+            ],
+            "token_texts": [
+              ")",
+              " ",
+              "print",
+              "("
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "NEWLINE",
+              "NAME",
+              "OPEN_PAREN"
+            ],
+            "line_numbers": {
+              "start1": 65,
+              "end1": 66,
+              "start2": 83,
+              "end2": 84
+            }
+          },
+          {
+            "start1": 74,
+            "end1": 76,
+            "start2": 227,
+            "end2": 229,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "NAME",
+                "text": "i",
+                "line": 14,
+                "column": 33,
+                "index": 74
+              },
+              {
+                "type": "MINUS",
+                "text": "-",
+                "line": 14,
+                "column": 34,
+                "index": 75
+              },
+              {
+                "type": "NUMBER",
+                "text": "1",
+                "line": 14,
+                "column": 35,
+                "index": 76
+              }
+            ],
+            "token_texts": [
+              "i",
+              "-",
+              "1"
+            ],
+            "token_types": [
+              "NAME",
+              "MINUS",
+              "NUMBER"
+            ],
+            "line_numbers": {
+              "start1": 14,
+              "end1": 14,
+              "start2": 38,
+              "end2": 38
+            }
+          },
+          {
+            "start1": 87,
+            "end1": 89,
+            "start2": 87,
+            "end2": 89,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "DOT",
+                "text": ".",
+                "line": 15,
+                "column": 20,
+                "index": 87
+              },
+              {
+                "type": "NAME",
+                "text": "append",
+                "line": 15,
+                "column": 21,
+                "index": 88
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 15,
+                "column": 27,
+                "index": 89
+              }
+            ],
+            "token_texts": [
+              ".",
+              "append",
+              "("
+            ],
+            "token_types": [
+              "DOT",
+              "NAME",
+              "OPEN_PAREN"
+            ],
+            "line_numbers": {
+              "start1": 15,
+              "end1": 15,
+              "start2": 15,
+              "end2": 15
+            }
+          },
+          {
+            "start1": 96,
+            "end1": 98,
+            "start2": 96,
+            "end2": 98,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "NEWLINE",
+                "text": "\n",
+                "line": 19,
+                "column": 0,
+                "index": 96
+              },
+              {
+                "type": "DEDENT",
+                "text": "\n",
+                "line": 19,
+                "column": 0,
+                "index": 97
+              },
+              {
+                "type": "DEF",
+                "text": "def",
+                "line": 19,
+                "column": 0,
+                "index": 98
+              }
+            ],
+            "token_texts": [
+              "\n",
+              "\n",
+              "def"
+            ],
+            "token_types": [
+              "NEWLINE",
+              "DEDENT",
+              "DEF"
+            ],
+            "line_numbers": {
+              "start1": 19,
+              "end1": 19,
+              "start2": 19,
+              "end2": 19
+            }
+          },
+          {
+            "start1": 167,
+            "end1": 169,
+            "start2": 167,
+            "end2": 169,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 28,
+                "column": 19,
+                "index": 167
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 29,
+                "column": 12,
+                "index": 168
+              },
+              {
+                "type": "INDENT",
+                "text": "            ",
+                "line": 29,
+                "column": 12,
+                "index": 169
+              }
+            ],
+            "token_texts": [
+              ":",
+              " ",
+              "            "
+            ],
+            "token_types": [
+              "COLON",
+              "NEWLINE",
+              "INDENT"
+            ],
+            "line_numbers": {
+              "start1": 28,
+              "end1": 29,
+              "start2": 28,
+              "end2": 29
+            }
+          },
+          {
+            "start1": 171,
+            "end1": 173,
+            "start2": 171,
+            "end2": 173,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "DOT",
+                "text": ".",
+                "line": 29,
+                "column": 18,
+                "index": 171
+              },
+              {
+                "type": "NAME",
+                "text": "append",
+                "line": 29,
+                "column": 19,
+                "index": 172
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 29,
+                "column": 25,
+                "index": 173
+              }
+            ],
+            "token_texts": [
+              ".",
+              "append",
+              "("
+            ],
+            "token_types": [
+              "DOT",
+              "NAME",
+              "OPEN_PAREN"
+            ],
+            "line_numbers": {
+              "start1": 29,
+              "end1": 29,
+              "start2": 29,
+              "end2": 29
+            }
+          },
+          {
+            "start1": 181,
+            "end1": 183,
+            "start2": 181,
+            "end2": 183,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "NEWLINE",
+                "text": "\n",
+                "line": 32,
+                "column": 0,
+                "index": 181
+              },
+              {
+                "type": "DEDENT",
+                "text": "\n",
+                "line": 32,
+                "column": 0,
+                "index": 182
+              },
+              {
+                "type": "DEF",
+                "text": "def",
+                "line": 32,
+                "column": 0,
+                "index": 183
+              }
+            ],
+            "token_texts": [
+              "\n",
+              "\n",
+              "def"
+            ],
+            "token_types": [
+              "NEWLINE",
+              "DEDENT",
+              "DEF"
+            ],
+            "line_numbers": {
+              "start1": 32,
+              "end1": 32,
+              "start2": 32,
+              "end2": 32
+            }
+          },
+          {
+            "start1": 194,
+            "end1": 196,
+            "start2": 194,
+            "end2": 196,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "ASSIGN",
+                "text": "=",
+                "line": 34,
+                "column": 6,
+                "index": 194
+              },
+              {
+                "type": "NAME",
+                "text": "len",
+                "line": 34,
+                "column": 8,
+                "index": 195
+              },
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 34,
+                "column": 11,
+                "index": 196
+              }
+            ],
+            "token_texts": [
+              "=",
+              "len",
+              "("
+            ],
+            "token_types": [
+              "ASSIGN",
+              "NAME",
+              "OPEN_PAREN"
+            ],
+            "line_numbers": {
+              "start1": 34,
+              "end1": 34,
+              "start2": 34,
+              "end2": 34
+            }
+          },
+          {
+            "start1": 266,
+            "end1": 268,
+            "start2": 287,
+            "end2": 289,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "DEDENT",
+                "text": " ",
+                "line": 39,
+                "column": 4,
+                "index": 266
+              },
+              {
+                "type": "DEDENT",
+                "text": " ",
+                "line": 39,
+                "column": 4,
+                "index": 267
+              },
+              {
+                "type": "RETURN",
+                "text": "return",
+                "line": 39,
+                "column": 4,
+                "index": 268
+              }
+            ],
+            "token_texts": [
+              " ",
+              " ",
+              "return"
+            ],
+            "token_types": [
+              "DEDENT",
+              "DEDENT",
+              "RETURN"
+            ],
+            "line_numbers": {
+              "start1": 39,
+              "end1": 39,
+              "start2": 44,
+              "end2": 44
+            }
+          },
+          {
+            "start1": 270,
+            "end1": 272,
+            "start2": 291,
+            "end2": 293,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "NEWLINE",
+                "text": "\n",
+                "line": 41,
+                "column": 0,
+                "index": 270
+              },
+              {
+                "type": "DEDENT",
+                "text": "\n",
+                "line": 41,
+                "column": 0,
+                "index": 271
+              },
+              {
+                "type": "CLASS",
+                "text": "class",
+                "line": 41,
+                "column": 0,
+                "index": 272
+              }
+            ],
+            "token_texts": [
+              "\n",
+              "\n",
+              "class"
+            ],
+            "token_types": [
+              "NEWLINE",
+              "DEDENT",
+              "CLASS"
+            ],
+            "line_numbers": {
+              "start1": 41,
+              "end1": 41,
+              "start2": 46,
+              "end2": 46
+            }
+          },
+          {
+            "start1": 296,
+            "end1": 298,
+            "start2": 315,
+            "end2": 317,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 44,
+                "column": 8,
+                "index": 296
+              },
+              {
+                "type": "NAME",
+                "text": "self",
+                "line": 44,
+                "column": 8,
+                "index": 297
+              },
+              {
+                "type": "DOT",
+                "text": ".",
+                "line": 44,
+                "column": 12,
+                "index": 298
+              }
+            ],
+            "token_texts": [
+              " ",
+              "self",
+              "."
+            ],
+            "token_types": [
+              "NEWLINE",
+              "NAME",
+              "DOT"
+            ],
+            "line_numbers": {
+              "start1": 44,
+              "end1": 44,
+              "start2": 49,
+              "end2": 49
+            }
+          },
+          {
+            "start1": 302,
+            "end1": 304,
+            "start2": 384,
+            "end2": 386,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 45,
+                "column": 8,
+                "index": 302
+              },
+              {
+                "type": "NAME",
+                "text": "self",
+                "line": 45,
+                "column": 8,
+                "index": 303
+              },
+              {
+                "type": "DOT",
+                "text": ".",
+                "line": 45,
+                "column": 12,
+                "index": 304
+              }
+            ],
+            "token_texts": [
+              " ",
+              "self",
+              "."
+            ],
+            "token_types": [
+              "NEWLINE",
+              "NAME",
+              "DOT"
+            ],
+            "line_numbers": {
+              "start1": 45,
+              "end1": 45,
+              "start2": 60,
+              "end2": 60
+            }
+          },
+          {
+            "start1": 308,
+            "end1": 310,
+            "start2": 321,
+            "end2": 323,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 47,
+                "column": 4,
+                "index": 308
+              },
+              {
+                "type": "DEDENT",
+                "text": " ",
+                "line": 47,
+                "column": 4,
+                "index": 309
+              },
+              {
+                "type": "DEF",
+                "text": "def",
+                "line": 47,
+                "column": 4,
+                "index": 310
+              }
+            ],
+            "token_texts": [
+              " ",
+              " ",
+              "def"
+            ],
+            "token_types": [
+              "NEWLINE",
+              "DEDENT",
+              "DEF"
+            ],
+            "line_numbers": {
+              "start1": 47,
+              "end1": 47,
+              "start2": 51,
+              "end2": 51
+            }
+          },
+          {
+            "start1": 323,
+            "end1": 325,
+            "start2": 282,
+            "end2": 284,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "COLON",
+                "text": ":",
+                "line": 48,
+                "column": 26,
+                "index": 323
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 49,
+                "column": 12,
+                "index": 324
+              },
+              {
+                "type": "INDENT",
+                "text": "            ",
+                "line": 49,
+                "column": 12,
+                "index": 325
+              }
+            ],
+            "token_texts": [
+              ":",
+              " ",
+              "            "
+            ],
+            "token_types": [
+              "COLON",
+              "NEWLINE",
+              "INDENT"
+            ],
+            "line_numbers": {
+              "start1": 48,
+              "end1": 49,
+              "start2": 42,
+              "end2": 43
+            }
+          },
+          {
+            "start1": 332,
+            "end1": 334,
+            "start2": 402,
+            "end2": 404,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "OPEN_PAREN",
+                "text": "(",
+                "line": 50,
+                "column": 18,
+                "index": 332
+              },
+              {
+                "type": "NAME",
+                "text": "self",
+                "line": 50,
+                "column": 19,
+                "index": 333
+              },
+              {
+                "type": "DOT",
+                "text": ".",
+                "line": 50,
+                "column": 23,
+                "index": 334
+              }
+            ],
+            "token_texts": [
+              "(",
+              "self",
+              "."
+            ],
+            "token_types": [
+              "OPEN_PAREN",
+              "NAME",
+              "DOT"
+            ],
+            "line_numbers": {
+              "start1": 50,
+              "end1": 50,
+              "start2": 63,
+              "end2": 63
+            }
+          },
+          {
+            "start1": 342,
+            "end1": 344,
+            "start2": 570,
+            "end2": 572,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "NAME",
+                "text": "grades",
+                "line": 50,
+                "column": 43,
+                "index": 342
+              },
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 50,
+                "column": 49,
+                "index": 343
+              },
+              {
+                "type": "NEWLINE",
+                "text": " ",
+                "line": 52,
+                "column": 4,
+                "index": 344
+              }
+            ],
+            "token_texts": [
+              "grades",
+              ")",
+              " "
+            ],
+            "token_types": [
+              "NAME",
+              "CLOSE_PAREN",
+              "NEWLINE"
+            ],
+            "line_numbers": {
+              "start1": 50,
+              "end1": 52,
+              "start2": 94,
+              "end2": 95
+            }
+          },
+          {
+            "start1": 355,
+            "end1": 357,
+            "start2": 454,
+            "end2": 456,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "ASSIGN",
+                "text": "=",
+                "line": 53,
+                "column": 12,
+                "index": 355
+              },
+              {
+                "type": "NAME",
+                "text": "self",
+                "line": 53,
+                "column": 14,
+                "index": 356
+              },
+              {
+                "type": "DOT",
+                "text": ".",
+                "line": 53,
+                "column": 18,
+                "index": 357
+              }
+            ],
+            "token_texts": [
+              "=",
+              "self",
+              "."
+            ],
+            "token_types": [
+              "ASSIGN",
+              "NAME",
+              "DOT"
+            ],
+            "line_numbers": {
+              "start1": 53,
+              "end1": 53,
+              "start2": 71,
+              "end2": 71
+            }
+          },
+          {
+            "start1": 414,
+            "end1": 416,
+            "start2": 521,
+            "end2": 523,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 69,
+                "column": 25,
+                "index": 414
+              },
+              {
+                "type": "NUMBER",
+                "text": "34",
+                "line": 69,
+                "column": 27,
+                "index": 415
+              },
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 69,
+                "column": 29,
+                "index": 416
+              }
+            ],
+            "token_texts": [
+              ",",
+              "34",
+              ","
+            ],
+            "token_types": [
+              "COMMA",
+              "NUMBER",
+              "COMMA"
+            ],
+            "line_numbers": {
+              "start1": 69,
+              "end1": 69,
+              "start2": 87,
+              "end2": 87
+            }
+          },
+          {
+            "start1": 418,
+            "end1": 420,
+            "start2": 517,
+            "end2": 519,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 69,
+                "column": 33,
+                "index": 418
+              },
+              {
+                "type": "NUMBER",
+                "text": "12",
+                "line": 69,
+                "column": 35,
+                "index": 419
+              },
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 69,
+                "column": 37,
+                "index": 420
+              }
+            ],
+            "token_texts": [
+              ",",
+              "12",
+              ","
+            ],
+            "token_types": [
+              "COMMA",
+              "NUMBER",
+              "COMMA"
+            ],
+            "line_numbers": {
+              "start1": 69,
+              "end1": 69,
+              "start2": 87,
+              "end2": 87
+            }
+          },
+          {
+            "start1": 458,
+            "end1": 460,
+            "start2": 552,
+            "end2": 554,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 74,
+                "column": 47,
+                "index": 458
+              },
+              {
+                "type": "NUMBER",
+                "text": "92",
+                "line": 74,
+                "column": 49,
+                "index": 459
+              },
+              {
+                "type": "COMMA",
+                "text": ",",
+                "line": 74,
+                "column": 51,
+                "index": 460
+              }
+            ],
+            "token_texts": [
+              ",",
+              "92",
+              ","
+            ],
+            "token_types": [
+              "COMMA",
+              "NUMBER",
+              "COMMA"
+            ],
+            "line_numbers": {
+              "start1": 74,
+              "end1": 74,
+              "start2": 93,
+              "end2": 93
+            }
+          },
+          {
+            "start1": 469,
+            "end1": 471,
+            "start2": 596,
+            "end2": 598,
+            "length": 3,
+            "tokens": [
+              {
+                "type": "CLOSE_PAREN",
+                "text": ")",
+                "line": 75,
+                "column": 26,
+                "index": 469
+              },
+              {
+                "type": "NEWLINE",
+                "text": ")",
+                "line": 75,
+                "column": 27,
+                "index": 470
+              },
+              {
+                "type": "DEDENT",
+                "text": ")",
+                "line": 75,
+                "column": 27,
+                "index": 471
+              }
+            ],
+            "token_texts": [
+              ")",
+              ")",
+              ")"
+            ],
+            "token_types": [
+              "CLOSE_PAREN",
+              "NEWLINE",
+              "DEDENT"
+            ],
+            "line_numbers": {
+              "start1": 75,
+              "end1": 75,
+              "start2": 101,
+              "end2": 101
+            }
+          }
+        ],
+        "variable_patterns": {
+          "count1": 35,
+          "count2": 50,
+          "common_count": 15,
+          "common_names": [
+            "name",
+            "append",
+            "int",
+            "grades",
+            "age",
+            "copy",
+            "range",
+            "len",
+            "i",
+            "__name__"
+          ],
+          "patterns": {
+            "camel_case": 0,
+            "snake_case": 32
+          }
+        },
+        "token_frequencies": {
+          "code1": {
+            "NAME": 112,
+            "NEWLINE": 56,
+            "NUMBER": 38,
+            "OPEN_PAREN": 30,
+            "CLOSE_PAREN": 30,
+            "COMMA": 23,
+            "COLON": 20,
+            "INDENT": 20,
+            "DEDENT": 20,
+            "ASSIGN": 16
+          },
+          "code2": {
+            "NAME": 148,
+            "NEWLINE": 77,
+            "NUMBER": 42,
+            "OPEN_PAREN": 38,
+            "CLOSE_PAREN": 38,
+            "COLON": 26,
+            "INDENT": 26,
+            "DEDENT": 26,
+            "COMMA": 26,
+            "ASSIGN": 24
+          }
+        },
+        "normalized_similarity": 94.11764705882352,
+        "code_lengths": {
+          "code1_chars": 2027,
+          "code2_chars": 2686,
+          "code1_lines": 75,
+          "code2_lines": 101
+        },
+        "original_code1": "def calculate_fibonacci(n):\n    \"\"\"\n    Calculate Fibonacci sequence up to n terms\n    \"\"\"\n    if n <= 0:\n        return []\n    elif n == 1:\n        return [0]\n    elif n == 2:\n        return [0, 1]\n    \n    fib_sequence = [0, 1]\n    for i in range(2, n):\n        next_term = fib_sequence[i-1] + fib_sequence[i-2]\n        fib_sequence.append(next_term)\n    \n    return fib_sequence\n\ndef find_primes(limit):\n    # Find all prime numbers up to limit\n    primes = []\n    for num in range(2, limit + 1):\n        is_prime = True\n        for i in range(2, int(num**0.5) + 1):\n            if num % i == 0:\n                is_prime = False\n                break\n        if is_prime:\n            primes.append(num)\n    return primes\n\ndef sort_list(numbers):\n    \"\"\"Sort a list of numbers in ascending order\"\"\"\n    n = len(numbers)\n    for i in range(n):\n        for j in range(0, n-i-1):\n            if numbers[j] > numbers[j+1]:\n                numbers[j], numbers[j+1] = numbers[j+1], numbers[j]\n    return numbers\n\nclass Student:\n    def __init__(self, name, age, grades):\n        self.name = name\n        self.age = age\n        self.grades = grades\n    \n    def calculate_average(self):\n        if not self.grades:\n            return 0.0\n        return sum(self.grades) / len(self.grades)\n    \n    def display_info(self):\n        avg = self.calculate_average()\n        print(f\"Student: {self.name}\")\n        print(f\"Age: {self.age}\")\n        print(f\"Average Grade: {avg:.2f}\")\n\n# Main execution\nif __name__ == \"__main__\":\n    # Test fibonacci\n    fib_result = calculate_fibonacci(10)\n    print(f\"First 10 Fibonacci numbers: {fib_result}\")\n    \n    # Test primes\n    prime_result = find_primes(50)\n    print(f\"Primes up to 50: {prime_result}\")\n    \n    # Test sorting\n    numbers_to_sort = [64, 34, 25, 12, 22, 11, 90]\n    sorted_numbers = sort_list(numbers_to_sort.copy())\n    print(f\"Sorted list: {sorted_numbers}\")\n    \n    # Test student class\n    student1 = Student(\"Alice\", 20, [85, 90, 78, 92, 88])\n    student1.display_info()",
+        "original_code2": "def compute_fibonacci(terms):\n    \"\"\"\n    Compute Fibonacci numbers for given terms count\n    \"\"\"\n    if terms <= 0:\n        return []\n    if terms == 1:\n        return [0]\n    if terms == 2:\n        return [0, 1]\n    \n    result = [0, 1]\n    for idx in range(2, terms):\n        new_value = result[idx-1] + result[idx-2]\n        result.append(new_value)\n    \n    return result\n\ndef get_prime_numbers(max_value):\n    # Generate prime numbers below max_value\n    prime_list = []\n    for current in range(2, max_value + 1):\n        prime_flag = True\n        for divisor in range(2, int(current**0.5) + 1):\n            if current % divisor == 0:\n                prime_flag = False\n                break\n        if prime_flag:\n            prime_list.append(current)\n    return prime_list\n\ndef bubble_sort(arr):\n    \"\"\"Sort array using bubble sort algorithm\"\"\"\n    size = len(arr)\n    swapped = False\n    for i in range(size):\n        swapped = False\n        for j in range(0, size-i-1):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n                swapped = True\n        if not swapped:\n            break\n    return arr\n\nclass Person:\n    def __init__(self, full_name, years_old):\n        self.full_name = full_name\n        self.years_old = years_old\n    \n    def get_name(self):\n        return self.full_name\n    \n    def get_age(self):\n        return self.years_old\n\nclass UniversityStudent(Person):\n    def __init__(self, name, age, scores):\n        super().__init__(name, age)\n        self.scores = scores\n    \n    def compute_average_score(self):\n        if len(self.scores) == 0:\n            return 0.0\n        total = 0.0\n        for score in self.scores:\n            total += score\n        return total / len(self.scores)\n    \n    def show_details(self):\n        average = self.compute_average_score()\n        print(f\"Name: {self.full_name}\")\n        print(f\"Age: {self.years_old}\")\n        print(f\"Average Score: {average:.1f}\")\n\n# Driver code\nif __name__ == \"__main__\":\n    # Fibonacci calculation\n    fib_output = compute_fibonacci(8)\n    print(f\"Fibonacci sequence (8 terms): {fib_output}\")\n    \n    # Prime numbers\n    primes = get_prime_numbers(30)\n    print(f\"Prime numbers up to 30: {primes}\")\n    \n    # Sorting example\n    data = [45, 23, 67, 12, 89, 34, 56]\n    sorted_data = bubble_sort(data.copy())\n    print(f\"Original: {data}\")\n    print(f\"Sorted: {sorted_data}\")\n    \n    # Student information\n    grades = [88, 92, 76, 95, 84]\n    student = UniversityStudent(\"Bob\", 22, grades)\n    student.show_details()\n    \n    # Additional test\n    x = 10\n    y = 20\n    sum_result = x + y\n    print(f\"Sum of {x} and {y} is {sum_result}\")"
+      }
+    }
+  ],
+  "num_files": 2
+}

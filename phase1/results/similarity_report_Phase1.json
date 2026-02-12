@@ -4117,16 +4117,16 @@
     "count2": 50,
     "common_count": 15,
     "common_names": [
-      "range",
-      "copy",
-      "int",
+      "i",
+      "len",
       "primes",
-      "self",
-      "print",
       "name",
       "age",
-      "i",
-      "j"
+      "int",
+      "range",
+      "grades",
+      "__init__",
+      "append"
     ],
     "patterns": {
       "camel_case": 0,

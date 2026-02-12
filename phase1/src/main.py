@@ -272,12 +272,12 @@ Examples:
         
         output_base = args.output
         if args.format in ['json', 'all']:
-            save_json_report(results, f"{output_base}_matrix.json")
+            save_json_report(results, f"phase1/results/matrix/similarity_report_Phase1_matrix.json")
         if args.format in ['html', 'all'] or args.visual:
             html_content = generate_matrix_html(results, filenames)
-            with open(f"{output_base}_matrix.html", 'w', encoding='utf-8') as f:
+            with open(f"phase1/results/matrix/similarity_report_Phase1_matrix.html", 'w', encoding='utf-8') as f:
                 f.write(html_content)
-            print(f"HTML: {output_base}_matrix.html")
+            print(f"HTML: phase1/results/matrix/similarity_report_Phase1_matrix.html")
         
         print(f"\nMatrix analysis complete!")
         
@@ -358,11 +358,11 @@ Examples:
         print(f"\nSaving reports...")
         
         if args.format in ['json', 'all']:
-            save_json_report(result, f"{output_base}.json")
+            save_json_report(result, f"phase1/results/similarity_report_Phase1.json")
         if args.format in ['html', 'all'] or args.visual:
-            save_html_report(analyzer, result, filenames[0], filenames[1], f"{output_base}.html")
+            save_html_report(analyzer, result, filenames[0], filenames[1], f"phase1/results/similarity_report_Phase1.html")
         if args.format in ['text', 'all']:
-            save_text_report(result, filenames[0], filenames[1], f"{output_base}.txt")
+            save_text_report(result, filenames[0], filenames[1], f"phase1/results/similarity_report_Phase1.txt")
         
         print(f"\nAnalysis complete!")
         print(f"Overall similarity: {result['overall_similarity']:.1f}%")

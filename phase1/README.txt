@@ -1,6 +1,6 @@
 pip install -r requirements.txt
 
-
+source venv/bin/activate 
 
 
 # to build the grammers based on the lexers: 
@@ -20,11 +20,6 @@ java -jar antlr-4.13.2-complete.jar -Dlanguage=Python3 -o ./generated/cpp CPP14L
 # تحلیل دو فایل پایتون
 python phase1/src/main.py phase1/tests/test_python/code1.py phase1/tests/test_python/code2.py --verbose
 python -m phase1.src.main phase1/tests/test_python/code1.py phase1/tests/test_python/code2.py --verbose
-
-
-
-# اجرای ساده با دو فایل
-python phase1/src/main.py phase1/tests/test_python/code1.py phase1/tests/test_python/code2.py
 
 # با خروجی HTML و نمایش جزئیات
 python phase1/src/main.py phase1/tests/test_python/code1.py phase1/tests/test_python/code2.py --visual --verbose
