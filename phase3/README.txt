@@ -5,9 +5,19 @@ This module implements Control Flow Graph (CFG) based similarity analysis for pl
 
 ## Installation
 
-### Method 1: Using pip
-```bash
 pip install -r requirements.txt
 
-### Method 2:
-pip install -e
+## How to run
+
+
+اجرای آنالیز CFG ساده:
+python -m phase3.main -f1 phase1/tests/test_python/code1.py -f2 phase1/tests/test_python/code2.py
+
+4. اجرای کامل سه فاز (خودکار):
+python -m phase3.main --full -f1 phase1/tests/test_python/code1.py -f2 phase1/tests/test_python/code2.py
+
+5. اجرا با نمایش بصری:
+python -m phase3.main -f1 phase1/tests/test_python/code1.py -f2 phase1/tests/test_python/code2.py --visualize --dot cfg.dot
+ 
+6. اجرای مثال‌ها:
+python -m phase3.example

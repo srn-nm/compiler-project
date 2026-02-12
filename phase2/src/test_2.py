@@ -17,9 +17,6 @@ def test_basic_imports():
         from analyzer import ASTSimilarityAnalyzer, Phase2ASTSimilarity
         print("analyzer imported successfully")
 
-        from utils import preprocess_code, extract_code_blocks
-        print("utils imported successfully")
-
         from similarity import calculate_ast_similarity
         print("similarity imported successfully")
 

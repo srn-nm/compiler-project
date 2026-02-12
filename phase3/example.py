@@ -1,13 +1,19 @@
 """
-Example usage of phase 3
+Phase 3 - Complete usage examples
+Run: python -m phase3.example
 """
+
 from analyzer.cfg_analyzer import Phase3CFGSimilarity, CFGAnalyzer
 from visualizer.cfg_visualizer import visualize_cfg, generate_cfg_report
+from integration.phase_integration import run_complete_analysis
+from utils.helpers import format_percentage, format_decision
 
-def example1():
-    """Simple example: Analyzing two simple functions"""
-    print("Example 1: Analyzing two sum calculation functions")
-    print("=" * 60)
+
+def example1_simple_functions():
+    """Example 1: Simple functions with same behavior, different names"""
+    print("\n" + "=" * 70)
+    print("EXAMPLE 1: Similar Behavior, Different Names")
+    print("=" * 70)
 
     code1 = """
 def calculate_sum(numbers):
@@ -28,27 +34,40 @@ def compute_total(values):
     analyzer = Phase3CFGSimilarity()
     results = analyzer.analyze_code_pair(code1, code2)
 
-    print(f"CFG Similarity Score: {results['cfg_similarity_score']:.2f}%")
-    print(f"Detection: {'Similar' if results['is_plagiarism_suspected'] else 'Not Similar'}")
+    score = results.get('cfg_similarity_score', 0)
+    is_plagiarism = results.get('is_plagiarism_suspected', False)
+    decision, emoji = format_decision(is_plagiarism, 70)
 
+    print(f"CFG Similarity: {score:.2f}%")
+    print(f"Verdict: {emoji} {decision}")
+    
+    if 'cfg_similarity_metrics' in results:
+        metrics = results['cfg_similarity_metrics']
+        print(f"\nMetrics:")
+        print(f"  • Structural: {metrics.get('structural_similarity', 0)*100:.1f}%")
+        print(f"  • Graph Edit: {metrics.get('graph_edit_similarity', 0)*100:.1f}%")
+        print(f"  • Subgraph:   {metrics.get('subgraph_similarity', 0)*100:.1f}%")
+    
     return results
 
-def example2():
-    """More complex example: Analyzing codes with different control structures"""
-    print("\nExample 2: Analyzing codes with complex structures")
-    print("=" * 60)
+
+def example2_control_structures():
+    """Example 2: Complex control structures"""
+    print("\n" + "=" * 70)
+    print("EXAMPLE 2: Complex Control Structures")
+    print("=" * 70)
 
     code1 = """
 def process_data(data):
     if not data:
         return []
-
+    
     results = []
     for item in data:
         if item > 0:
             processed = transform(item)
             results.append(processed)
-
+    
     return sorted(results)
 
 def transform(x):
@@ -59,13 +78,13 @@ def transform(x):
 def handle_items(items):
     if len(items) == 0:
         return []
-
+    
     output = []
     for element in items:
         if element >= 0:
             modified = convert(element)
             output.append(modified)
-
+    
     output.sort()
     return output
 
@@ -76,112 +95,172 @@ def convert(y):
     analyzer = Phase3CFGSimilarity()
     results = analyzer.analyze_code_pair(code1, code2)
 
-    report = generate_cfg_report(results)
-    print(report)
-
+    print(generate_cfg_report(results))
     return results
 
 
-def example3():
-    """Example using previous phases"""
-    print("\nExample 3: Integrated analysis with phases 1 and 2")
-    print("=" * 60)
+def example3_different_algorithms():
+    """Example 3: Different algorithms, different behavior"""
+    print("\n" + "=" * 70)
+    print("EXAMPLE 3: Different Algorithms")
+    print("=" * 70)
 
     code1 = """
 def factorial_iterative(n):
     result = 1
-    for i in range(1, n+1):
+    for i in range(1, n + 1):
         result *= i
     return result
 """
 
     code2 = """
-def fact_recursive(x):
-    if x <= 1:
+def factorial_recursive(n):
+    if n <= 1:
         return 1
-    return x * fact_recursive(x-1)
+    return n * factorial_recursive(n - 1)
 """
 
-    phase1_results = {
-        'overall_similarity': 45.5,
-        'token_counts': {'code1': 25, 'code2': 20, 'common': 10},
-        'matched_sections': []
-    }
-
-    phase2_results = {
-        'ast_similarity_score': 38.2,
-        'ast_statistics': {
-            'code1': {'total_nodes': 15},
-            'code2': {'total_nodes': 12}
-        },
-        'is_plagiarism_suspected': False
-    }
-
     analyzer = Phase3CFGSimilarity()
-    results = analyzer.analyze_code_pair(
-        code1, code2, phase1_results, phase2_results
-    )
+    results = analyzer.analyze_code_pair(code1, code2)
 
-    print(f"Combined Score: {results.get('combined_similarity_score', 0):.2f}%")
-    print(f"CFG Score: {results.get('cfg_similarity_score', 0):.2f}%")
-    print(f"Final Decision: {results.get('final_decision', 'Unknown')}")
+    score = results.get('cfg_similarity_score', 0)
+    is_plagiarism = results.get('is_plagiarism_suspected', False)
+    decision, emoji = format_decision(is_plagiarism, 70)
 
+    print(f"CFG Similarity: {score:.2f}%")
+    print(f"Verdict: {emoji} {decision}")
+    print(f"\nExplanation: Different control flow patterns")
+    
     return results
 
 
-def example4_visualization():
-    """CFG Visualization Example"""
-    print("\nExample 4: CFG Visualization")
-    print("=" * 60)
+def example4_complete_analysis():
+    """Example 4: Complete three-phase analysis"""
+    print("\n" + "=" * 70)
+    print("EXAMPLE 4: Complete Three-Phase Analysis")
+    print("=" * 70)
 
-    code = """
+    code1 = """
 def find_max(numbers):
     if not numbers:
         return None
-
-    max_num = numbers[0]
+    
+    max_val = numbers[0]
     for num in numbers:
-        if num > max_num:
-            max_num = num
+        if num > max_val:
+            max_val = num
+    
+    return max_val
+"""
 
-    return max_num
+    code2 = """
+def get_maximum(values):
+    if len(values) == 0:
+        return None
+    
+    maximum = values[0]
+    for value in values:
+        if value > maximum:
+            maximum = value
+    
+    return maximum
+"""
+
+    print("Running all three phases (Token + AST + CFG)...")
+    results = run_complete_analysis(code1, code2, output_file="complete_analysis.json")
+
+    if 'combined_similarity_score' in results:
+        print(f"\n🎯 Final Results:")
+        print(f"   Combined Score: {results['combined_similarity_score']:.2f}%")
+        
+        if 'individual_scores' in results:
+            scores = results['individual_scores']
+            print(f"   • Token: {scores.get('token', 0):.1f}%")
+            print(f"   • AST:   {scores.get('ast', 0):.1f}%")
+            print(f"   • CFG:   {scores.get('cfg', 0):.1f}%")
+        
+        if 'confidence' in results:
+            print(f"   • Confidence: {results['confidence']:.1f}%")
+        
+        is_plagiarism = results.get('is_plagiarism_suspected', False)
+        decision, emoji = format_decision(is_plagiarism, 70)
+        print(f"\n⚖️  Verdict: {emoji} {decision}")
+        
+        if 'recommendation' in results:
+            print(f"\n💡 Recommendation: {results['recommendation']}")
+    
+    return results
+
+
+def example5_cfg_visualization():
+    """Example 5: CFG Visualization"""
+    print("\n" + "=" * 70)
+    print("EXAMPLE 5: CFG Visualization")
+    print("=" * 70)
+
+    code = """
+def binary_search(arr, target):
+    left = 0
+    right = len(arr) - 1
+    
+    while left <= right:
+        mid = (left + right) // 2
+        
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    
+    return -1
 """
 
     analyzer = CFGAnalyzer()
-    ast1, _ = analyzer._get_asts_from_phase2(code, "")
-    cfg = analyzer.build_cfg_from_ast(ast1)
+    from analyzer.cfg_builder import create_mock_ast
+    ast = create_mock_ast()
+    cfg = analyzer.build_cfg_from_ast(ast)
 
-    visualization = visualize_cfg(cfg, max_nodes=20)
-    print(visualization)
-    from visualizer.cfg_visualizer import visualize_cfg, generate_cfg_report
-    generate_cfg_report(cfg, "example_cfg.dot")
-    print("DOT file saved at example_cfg.dot")
+    print(visualize_cfg(cfg, max_nodes=20))
+    
+    # Generate DOT file
+    from visualizer.cfg_visualizer import generate_cfg_dot_file
+    generate_cfg_dot_file(cfg, "binary_search.dot")
+    print("📁 DOT file: binary_search.dot")
+    
+    return cfg
 
 
 def main():
-    """Main function"""
-    print("Phase 3 Project Usage Examples")
-    print("=" * 60)
+    """Run all examples"""
+    print("\n" + "=" * 70)
+    print("           PHASE 3 - COMPLETE EXAMPLES")
+    print("=" * 70)
 
-    results1 = example1()
-    results2 = example2()
-    results3 = example3()
-    example4_visualization()
+    results1 = example1_simple_functions()
+    results2 = example2_control_structures()
+    results3 = example3_different_algorithms()
+    results4 = example4_complete_analysis()
+    example5_cfg_visualization()
 
     # Summary
-    print("\n" + "=" * 60)
-    print("Results Summary:")
-    print(
-        f"Example 1 (simple functions): {results1['cfg_similarity_score']:.1f}% - {results1['is_plagiarism_suspected']}")
-    print(
-        f"Example 2 (complex structure): {results2['cfg_similarity_score']:.1f}% - {results2['is_plagiarism_suspected']}")
-
-    if 'combined_similarity_score' in results3:
-        print(
-            f"Example 3 (integrated): {results3['combined_similarity_score']:.1f}% - {results3['is_plagiarism_suspected']}")
-    else:
-        print(
-            f"Example 3 (integrated): {results3['cfg_similarity_score']:.1f}% - {results3['is_plagiarism_suspected']}")
+    print("\n" + "=" * 70)
+    print("           SUMMARY")
+    print("=" * 70)
+    
+    scores = [
+        ("Simple functions", results1.get('cfg_similarity_score', 0)),
+        ("Control structures", results2.get('cfg_similarity_score', 0)),
+        ("Different algorithms", results3.get('cfg_similarity_score', 0)),
+    ]
+    
+    for name, score in scores:
+        print(f"  • {name:20}: {score:.1f}%")
+    
+    if 'combined_similarity_score' in results4:
+        print(f"  • Complete analysis: {results4['combined_similarity_score']:.1f}%")
+    
+    print("\n" + "=" * 70)
 
 
 if __name__ == "__main__":

@@ -1,1 +1,8 @@
+antlr4-python3-runtime==4.13.2
+antlr4-tools==0.2.2
+anytree==2.13.0
+install-jdk==1.1.0
+networkx==3.6.1
 numpy==2.4.2
+pydot==4.0.1
+pyparsing==3.3.2
