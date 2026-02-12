@@ -3,12 +3,10 @@ Phase 3 integration with phases 1 and 2
 """
 
 import json
-import sys
 from typing import Dict, Any, Optional
+import sys
 from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from ..analyzer.cfg_analyzer import Phase3CFGSimilarity
 
 

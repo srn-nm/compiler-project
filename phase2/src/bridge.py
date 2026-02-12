@@ -3,14 +3,15 @@ Bridge between Phase 1 and Phase 2
 Assuming Phase 1 is in the phase1 directory
 """
 
-import sys
+
 import os
 import subprocess
 import json
 import tempfile
-from pathlib import Path
 from typing import Dict, Optional, Tuple
-
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))  # ریشه پروژه
 
 def run_phase1_simple(code1: str, code2: str, config_path: str = None) -> Optional[Dict]:
 

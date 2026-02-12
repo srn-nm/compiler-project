@@ -495,3 +495,25 @@ class Phase2ASTSimilarity:
         }
 
         return extensions_map.get(ext, 'python')  # Default to Python
+
+    def analyze_code_pair(self, code1: str, code2: str, language: str = 'python',
+                          phase1_results: Dict = None) -> Dict[str, Any]:
+        """Analyze two codes - main entry point"""
+        self.analyzer = ASTSimilarityAnalyzer(language, self.config_path)
+
+        # ساخت AST
+        ast1 = self.analyzer.parse_code(code1)
+        ast2 = self.analyzer.parse_code(code2)
+
+        if phase1_results:
+            results = self.analyzer.analyze_with_phase1(code1, code2, phase1_results)
+        else:
+            results = self.analyzer.calculate_ast_similarity(ast1, ast2)
+
+        # افزودن AST به نتایج برای فازهای بعدی
+        if hasattr(ast1, 'to_dict'):
+            results['ast1_dict'] = ast1.to_dict()
+        if hasattr(ast2, 'to_dict'):
+            results['ast2_dict'] = ast2.to_dict()
+
+        return results

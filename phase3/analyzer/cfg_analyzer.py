@@ -525,3 +525,30 @@ class Phase3CFGSimilarity:
             code2 = f.read()
 
         return self.analyze_code_pair(code1, code2)
+
+    def analyze_code_pair(self, code1: str, code2: str,
+                          phase1_results: Dict = None,
+                          phase2_results: Dict = None) -> Dict[str, Any]:
+        """
+        Analyze two codes with optional phase 1 and 2 results
+        """
+        ast1 = None
+        ast2 = None
+
+        if phase2_results:
+            # تلاش برای دریافت AST واقعی از نتایج فاز ۲
+            ast1 = phase2_results.get('ast1_dict')
+            ast2 = phase2_results.get('ast2_dict')
+
+            # اگر AST وجود نداشت، از روش قبلی استفاده کن
+            if not ast1:
+                ast1 = self._create_mock_ast_from_phase2(phase2_results, 'code1')
+            if not ast2:
+                ast2 = self._create_mock_ast_from_phase2(phase2_results, 'code2')
+
+        cfg_results = self.analyzer.analyze_code_pair(code1, code2, ast1, ast2)
+
+        if phase1_results and phase2_results:
+            return self._integrate_all_results(phase1_results, phase2_results, cfg_results)
+
+        return cfg_results
