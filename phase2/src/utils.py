@@ -1,7 +1,3 @@
-"""
-Helper functions and utilities for Phase 2
-"""
-
 import re
 import ast
 import json

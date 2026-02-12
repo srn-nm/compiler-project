@@ -2,10 +2,13 @@ import sys
 import argparse
 import json
 from pathlib import Path
-from .similarity import calculate_ast_similarity
-from .bridge import Phase1Phase2Bridge  
 
 sys.path.insert(0, str(Path(__file__).parent))
+
+from .similarity import calculate_ast_similarity, integrate_with_phase1, generate_text_report
+from .bridge import Phase1Phase2Bridge
+from .report_generator import generate_phase2_html_report, generate_integrated_html_report
+
 
 def read_file(file_path: str) -> str:
     try:
@@ -20,11 +23,37 @@ def detect_language(filename: str) -> str:
     ext = Path(filename).suffix.lower()
     extensions_map = {
         '.py': 'python', '.java': 'java',
-        '.cpp': 'cpp', '.cc': 'cpp', '.cxx': 'cpp', '.hpp': 'cpp', '.h': 'cpp',
-        '.c': 'c', '.js': 'javascript', '.go': 'go',
-        '.rs': 'rust', '.php': 'php', '.rb': 'ruby', '.cs': 'csharp',
+        '.cpp': 'cpp', '.cc': 'cpp', '.cxx': 'cpp', 
     }
     return extensions_map.get(ext, 'python')
+
+
+def save_json_report(results: dict, output_path: str):
+    output_json = output_path if output_path.endswith('.json') else output_path + '.json'
+    with open("phase2/results/phase2_report.json", 'w', encoding='utf-8') as f:
+        json.dump(results, f, ensure_ascii=False, indent=2)
+    print(f"JSON report: phase2/results/phase2_report.json")
+    return "phase2/results/phase2_report.json"
+
+
+def save_text_report(results: dict, output_path: str):
+    """Save results as text report"""
+    txt_file = output_path.replace('.json', '.txt')
+    report = generate_text_report(results)
+    with open(txt_file, 'w', encoding='utf-8') as f:
+        f.write(report)
+    print(f"Text report: {txt_file}")
+    return txt_file
+
+
+def save_html_report(results: dict, file1_name: str, file2_name: str, output_path: str, phase1_results: dict = None):
+    if phase1_results:
+        html_file = output_path.replace('.json', '_integrated.html')
+        generate_integrated_html_report(phase1_results, results, file1_name, file2_name, html_file)
+    else:
+        html_file = output_path.replace('.json', '.html')
+        generate_phase2_html_report(results, file1_name, file2_name, html_file)
+    return html_file
 
 
 def main():
@@ -34,12 +63,13 @@ def main():
         epilog="""
 Examples:
   %(prog)s -f1 code1.py -f2 code2.py
+  %(prog)s -f1 code1.py -f2 code2.py --html-only
   %(prog)s -c1 "def sum(a,b): return a+b" -c2 "def add(x,y): return x+y"
-  %(prog)s --phase1-results results_phase1.json --file1 code1.py --file2 code2.py
+  %(prog)s --phase1-results results_phase1.json -f1 code1.py -f2 code2.py
+  %(prog)s -f1 code1.py -f2 code2.py --verbose --text-report
         """
     )
 
-    # Input options
     input_group = parser.add_argument_group('Input')
     input_group.add_argument('-f1', '--file1', help='Path to first code file')
     input_group.add_argument('-f2', '--file2', help='Path to second code file')
@@ -53,8 +83,8 @@ Examples:
 
     # Phase 2 options
     phase2_group = parser.add_argument_group('Phase 2 Settings')
-    phase2_group.add_argument('-o', '--output', default='phase2_report.json',
-                              help='Output report file (default: phase2_report.json)')
+    phase2_group.add_argument('-o', '--output', default='phase2_report',
+                              help='Output report file name (without extension)')
     phase2_group.add_argument('-t', '--threshold', type=float, default=0.65,
                               help='Plagiarism detection threshold (default: 0.65)')
     phase2_group.add_argument('--language', '-l', default='auto',
@@ -64,63 +94,81 @@ Examples:
 
     # Output options
     output_group = parser.add_argument_group('Output')
-    output_group.add_argument('--verbose', '-v', action='store_true', help='Show detailed output')
+    output_group.add_argument('--verbose', '-v', action='store_true', help='Show detailed output in terminal')
     output_group.add_argument('--no-json', action='store_true', help='Do not save JSON output')
-    output_group.add_argument('--text-report', action='store_true', help='Create separate text report')
+    output_group.add_argument('--no-html', action='store_true', help='Do not save HTML output')
+    output_group.add_argument('--html-only', action='store_true', help='Save only HTML report (no JSON)')
+    output_group.add_argument('--text-report', action='store_true', help='Create text report')
+    output_group.add_argument('--output-dir', default='.', help='Output directory for reports')
 
     args = parser.parse_args()
 
     code1, code2 = None, None
     language = args.language
+    file1_name = "code1"
+    file2_name = "code2"
 
     if args.file1:
         code1 = read_file(args.file1)
+        file1_name = Path(args.file1).name
         if language == 'auto':
             language = detect_language(args.file1)
     elif args.code1:
         code1 = args.code1
-
-    if args.file2:
-        code2 = read_file(args.file2)
-        if language == 'auto' and not code1:
-            language = detect_language(args.file2)
-    elif args.code2:
-        code2 = args.code2
-
-    if not code1 or not code2:
-        print("Please specify input codes.")
+        file1_name = "code1.txt"
+    else:
+        print("Error: Please specify input code 1 (-f1 or -c1)")
         parser.print_help()
         sys.exit(1)
 
-    print("=" * 60)
-    print("Phase 2: Abstract Syntax Tree (AST) Similarity Analysis")
-    print("=" * 60)
+    if args.file2:
+        code2 = read_file(args.file2)
+        file2_name = Path(args.file2).name
+        if language == 'auto' and not args.file1:
+            language = detect_language(args.file2)
+    elif args.code2:
+        code2 = args.code2
+        file2_name = "code2.txt"
+    else:
+        print("Error: Please specify input code 2 (-f2 or -c2)")
+        parser.print_help()
+        sys.exit(1)
 
-    results = None
+    output_dir = Path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_base = output_dir / args.output
+
+    print("\n" + "=" * 70)
+    print("                 PHASE 2: AST SIMILARITY ANALYSIS")
+    print("=" * 70)
+    print(f"File 1: {file1_name}")
+    print(f"File 2: {file2_name}")
+    print(f"Language: {language}")
+    print("-" * 70)
+
     phase1_results = None
-
-    #now load Phase 1 results if available
     if args.phase1_results:
-        print(" Loading Phase 1 results...")
+        print("\nLoading Phase 1 results...")
         try:
             bridge = Phase1Phase2Bridge(args.phase1_results)
             phase1_results = bridge.phase1_results
             summary = bridge.get_summary()
-            print(f" Phase 1 results loaded (Score: {summary.get('token_similarity', 0):.1f}%)")
-            print(f"   Matching sections: {summary.get('matching_sections', 0)}")
-            print(f"   Common variables: {summary.get('common_variables', 0)}")
+            print(f"Phase 1 loaded: {summary.get('token_similarity', 0):.1f}% similarity")
+            print(f"     • Matching sections: {summary.get('matching_sections', 0)}")
+            print(f"     • Common variables: {summary.get('common_variables', 0)}")
         except Exception as e:
-            print(f" Error loading Phase 1 results: {e}")
+            print(f"Error loading Phase 1 results: {e}")
+            print("Continuing with Phase 2 only...")
 
-    # Run analysis
+    print("\nRunning analysis...")
+    
     if phase1_results:
-        print("\n Running integrated analysis (Phase 1 + Phase 2)...")
-        from .similarity import integrate_with_phase1
+        print("     Mode: Integrated (Phase 1 + Phase 2)")
         results = integrate_with_phase1(
             phase1_results, code1, code2, language, args.config
         )
     else:
-        print("\n Running structural analysis (AST only)...")
+        print("     Mode: AST only")
         results = calculate_ast_similarity(code1, code2, language, args.config)
 
     if args.threshold != 0.65:
@@ -132,56 +180,100 @@ Examples:
             results['is_plagiarism_suspected'] = ast_score >= args.threshold
         results['threshold_used'] = args.threshold
 
-    # report
-    print("\n Generating report...")
+    print("\n" + "=" * 70)
+    print("ANALYSIS RESULTS")
+    print("=" * 70)
+
+    if 'combined_similarity_score' in results:
+        print(f"\n Combined Score: {results['combined_similarity_score']:.1f}%")
+        print(f"     • Token: {results.get('token_similarity_score', 0):.1f}%")
+        print(f"     • AST:   {results.get('ast_similarity_score', 0):.1f}%")
+    else:
+        print(f"\n AST Similarity Score: {results.get('ast_similarity_score', 0):.1f}%")
+
+    # AST Metrics
+    ast_metrics = results.get('phase2_details', {}).get('ast_similarity_metrics', 
+                  results.get('ast_similarity_metrics', {}))
+    if ast_metrics:
+        print(f"\n AST Metrics:")
+        for metric, value in ast_metrics.items():
+            metric_name = {
+                'structural_similarity': 'Structural',
+                'node_type_similarity': 'Node Type',
+                'subtree_similarity': 'Subtree',
+                'depth_similarity': 'Depth'
+            }.get(metric, metric)
+            print(f"     • {metric_name}: {value*100:.1f}%")
+
+    ast_stats = results.get('phase2_details', {}).get('ast_statistics', {})
+    if ast_stats:
+        stats1 = ast_stats.get('code1', {})
+        stats2 = ast_stats.get('code2', {})
+        print(f"\n AST Statistics:")
+        print(f"     • Code 1: {stats1.get('total_nodes', 0)} nodes, depth {stats1.get('max_depth', 0)}")
+        print(f"     • Code 2: {stats2.get('total_nodes', 0)} nodes, depth {stats2.get('max_depth', 0)}")
+
+    matched_nodes = results.get('phase2_details', {}).get('matched_nodes_count',
+                    results.get('matched_nodes_count', 0))
+    print(f"\n Similar Nodes: {matched_nodes}")
+
+    # Decision
+    threshold = results.get('threshold_used', 0.65) * 100
+    is_plagiarism = results.get('is_plagiarism_suspected', False)
+    print(f"\n Decision:")
+    print(f"     • Threshold: {threshold:.0f}%")
+    if is_plagiarism:
+        print(f"     • Result: SIMILAR (Possible Plagiarism)")
+    else:
+        print(f"     • Result: NOT SIMILAR")
 
     if args.verbose:
+        print("\n" + "=" * 70)
+        print("VERBOSE OUTPUT")
+        print("=" * 70)
         from .visualizer import visualize_ast_comparison
         print(visualize_ast_comparison(results))
 
-    if not args.no_json:
-        output_json = args.output if args.output.endswith('.json') else args.output + '.json'
-        with open(output_json, 'w', encoding='utf-8') as f:
-            json.dump(results, f, ensure_ascii=False, indent=2)
-        print(f" Results saved to {output_json}")
+    print("\n" + "=" * 70)
+    print("SAVING REPORTS")
+    print("=" * 70)
 
-    if args.text_report or args.verbose:
-        from .similarity import generate_text_report
-        report = generate_text_report(results)
+    saved_files = []
 
-        if args.text_report:
-            txt_file = args.output.replace('.json', '.txt')
-            with open(txt_file, 'w', encoding='utf-8') as f:
-                f.write(report)
-            print(f" Text report saved to {txt_file}")
+    # Save JSON
+    if not args.no_json and not args.html_only:
+        json_path = save_json_report(results, str(output_base))
+        saved_files.append(json_path)
 
-        if not args.verbose:
-            print(report)
+    # Save HTML
+    if not args.no_html:
+        html_path = save_html_report(
+            results, 
+            file1_name, 
+            file2_name, 
+            str("phase2/results/phase2_report") + ('.json' if not args.html_only else ''),
+            phase1_results if phase1_results else None
+        )
+        saved_files.append(html_path)
 
-    #final result display
-    print("\n" + "=" * 60)
-    print(" Final Result:")
+    if args.text_report:
+        txt_path = save_text_report(results, str(output_base) + '.json')
+        saved_files.append(txt_path)
 
+    print("\n" + "=" * 70)
+    print("ANALYSIS COMPLETE")
+    print("=" * 70)
+    print(f"\n  Output directory: {output_dir.absolute()}")
+    for file in saved_files:
+        print(f"     • {Path(file).name}")
+    
     if 'combined_similarity_score' in results:
-        score = results['combined_similarity_score']
-        print(f"   Combined Score: {score:.2f}%")
-        print(f"   • Token: {results.get('token_similarity_score', 0):.1f}%")
-        print(f"   • AST: {results.get('ast_similarity_score', 0):.1f}%")
+        final_score = results['combined_similarity_score']
     else:
-        score = results.get('ast_similarity_score', 0)
-        print(f"   Structural Score: {score:.2f}%")
-
-    threshold = results.get('threshold_used', 0.65) * 100
-    is_plagiarism = results.get('is_plagiarism_suspected', False)
-
-    if is_plagiarism:
-        print(f"     Detection: SIMILAR (Possible Plagiarism)")
-        print(f"      Above threshold {threshold:.0f}%")
-    else:
-        print(f"     Detection: NOT SIMILAR")
-        print(f"      Below threshold {threshold:.0f}%")
-
-    print("=" * 60)
+        final_score = results.get('ast_similarity_score', 0)
+    
+    print(f"\n  Final Similarity Score: {final_score:.1f}%")
+    print("\n" + "=" * 70 + "\n")
 
 
 if __name__ == '__main__':
